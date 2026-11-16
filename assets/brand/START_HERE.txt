@@ -1,0 +1,40 @@
+EMBERBANTER - START HERE
+Prepared November 15, 2026 (Eastern Time)
+
+1. Confirm the name in Twitch and YouTube's handle fields before publishing.
+   Candidate: EmberBanter / @emberbanter. It has NOT been reserved.
+2. Unzip this folder on your streaming computer. Keep the scenes folder intact.
+3. Open Preview.html for the scene gallery; read Quick_Start.pdf for setup.
+4. In OBS add a Browser source. Tick Local file, choose scenes/starting.html,
+   set Width 1920, Height 1080, and use a 1920x1080 canvas.
+5. Create separate scenes for Starting, Gameplay, Talk, BRB and Ending.
+   Add the corresponding HTML file to each scene. Add your game capture and
+   mic to Gameplay; add the mic to Talk. Do NOT add those sources to BRB.
+6. Disable global Desktop Audio and global Mic/Aux if you use scene-specific
+   sources. Otherwise they can remain audible during BRB. Test with a recording.
+7. On Gameplay, optional gameplay-overlay.html goes ABOVE your game source.
+   Its small label starts at the top-left. Move or hide it if it covers the HUD.
+8. Enable Refresh browser source when scene becomes active for Starting.
+   The three-minute timer resets on refresh; READY does NOT start streaming
+   and does NOT switch scenes. You control both actions in OBS.
+9. To change the name/tagline/topic, edit scenes/brand-config.js in Notepad.
+   Keep quotes around text; save, then refresh the OBS browser sources.
+   Leave handle blank until it is successfully claimed. No handles or links
+   are shown as owned by default.
+10. Record five minutes, listen, inspect OBS Stats, then run a deliberate
+    short live test. A Twitch test is public; don't assume it is private.
+
+WHAT IS INCLUDED
+5 local HTML scene sources, shared styling/config, Preview.html,
+Quick_Start.pdf, CHANNEL_COPY.txt, NAME_SCREENING.md, SOURCES.txt.
+The avatar logo is supplied separately in the chat.
+
+WHAT STILL NEEDS YOUR COMPUTER
+DTG was offline at the device check. Nothing has been installed or configured
+there. Xbox, mic and interface models, computer capability, upload speed,
+party chat, picture/audio sync and the actual OBS import need verification.
+This is not an automatically imported OBS scene collection.
+
+Brand direction: charcoal / ember orange / mint / bone. Warm late-night
+gaming and honest conversation. Optional face camera. No new hardware
+purchase recommended before your existing Remote Play route is tested.

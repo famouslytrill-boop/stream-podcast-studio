@@ -1,0 +1,13 @@
+[
+  {
+    "guid": "urn:uuid:868b9ef2-ecfa-4374-8a49-c139de89b59a",
+    "title": "EXAMPLE ONLY: Clock Out, Queue Up",
+    "description": "Demonstration metadata, not a recorded or published episode. Replace every media value before release.",
+    "published_at": "2026-11-15T20:00:00-05:00",
+    "audio_url": "https://example.com/emberbanter/ep001.mp3",
+    "mime_type": "audio/mpeg",
+    "length_bytes": 123456,
+    "duration_seconds": 1800,
+    "explicit": true
+  }
+]

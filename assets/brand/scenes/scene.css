@@ -1,0 +1,20 @@
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{background:transparent;font-family:Arial,Helvetica,sans-serif;color:#F4F1E8}
+.stage{width:1920px;height:1080px;position:absolute;left:0;top:0;transform-origin:0 0;overflow:hidden;background:#101216}
+.stage:not(.overlay){background:radial-gradient(ellipse at 84% 48%,#3b201c 0%,#17191d 34%,#101216 68%)}
+.stage:before{content:"";position:absolute;inset:0;border:1px solid #2d3037;margin:40px;pointer-events:none}
+.rail{position:absolute;left:100px;top:89px;width:7px;height:46px;background:#FF6A3D}
+.brand{position:absolute;left:132px;top:83px;font-size:45px;font-weight:900;letter-spacing:-1.5px;white-space:nowrap}
+.eyebrow{position:absolute;left:104px;top:260px;font-size:22px;font-weight:700;letter-spacing:6px;color:#8EF2CE}
+.headline{position:absolute;left:97px;top:310px;font-size:134px;line-height:.98;letter-spacing:-7px;font-weight:900;margin:0;max-width:1430px}
+.headline span{display:block;color:#FF6A3D}
+.note{position:absolute;left:104px;top:644px;font-size:30px;color:#bfc2ca;line-height:1.5;max-width:1250px}
+.footer{position:absolute;left:104px;right:104px;bottom:88px;border-top:1px solid #383b43;padding-top:26px;display:flex;justify-content:space-between;font-size:23px;letter-spacing:1px}
+.footer .tag{color:#F4F1E8}.footer .topic{color:#8EF2CE;font-size:19px;letter-spacing:2px}
+.count{position:absolute;right:110px;top:122px;font-size:58px;letter-spacing:3px;color:#FF6A3D;font-weight:700;font-variant-numeric:tabular-nums}
+.orbit{position:absolute;width:570px;height:570px;border:1px solid #59362e;border-radius:50%;right:-180px;top:260px;opacity:.6}
+.orbit:after{content:"";position:absolute;inset:56px;border:1px solid #59362e;border-radius:50%}
+.talk .headline{font-size:120px;max-width:1100px;top:300px}.talk .note{top:610px}
+.talk .topic-card{position:absolute;left:104px;top:740px;border-left:4px solid #8EF2CE;padding-left:25px;font-size:28px;max-width:1350px}
+.overlay{background:transparent}.overlay:before{display:none}.overlay .bug{position:absolute;left:38px;top:30px;display:flex;align-items:center;gap:14px;padding:12px 19px;background:rgba(16,18,22,.91);border-left:4px solid #FF6A3D;border-radius:0 5px 5px 0;font-size:25px;font-weight:800;letter-spacing:-.6px}
+.overlay .tag{font-size:13px;color:#8EF2CE;font-weight:400;letter-spacing:1px;padding-left:16px;border-left:1px solid #575961}

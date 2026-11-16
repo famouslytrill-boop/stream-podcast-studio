@@ -1,0 +1,10 @@
+{
+  "title": "EmberBanter",
+  "description": "After-work gaming, horror nights, and honest conversation. Clock out. Queue up.",
+  "language": "en-US",
+  "author": "Dam",
+  "website_url": "https://example.com/emberbanter",
+  "feed_url": "https://example.com/emberbanter/feed.xml",
+  "artwork_url": "https://example.com/emberbanter/cover.jpg",
+  "explicit": true
+}

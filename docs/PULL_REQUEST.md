@@ -1,0 +1,7 @@
+Prepare local recordings for reusable vertical clips and give EmberBanter a repeatable first-show workflow. This replaces a README-only workspace with the recovered scenes/core production tools, a reviewed clip exporter, rehearsal scripts, current platform research and empty measurement templates.
+
+The clip tool produces up to three local 1080×1920 exports from actual in/out seconds. It preserves the original recording, selects an explicit audio stream, keeps the full game frame by default, refuses unreviewed cuts and existing output folders, and verifies the encoded files. Captions, finished audio mixing and human review remain editing tasks. It performs no recording, upload or broadcast.
+
+Validation: all six focused tests passed on Linux/Python 3.12 and on DTG/Windows/Python 3.14 with real FFmpeg exports. Both layouts decoded successfully; the selected tone track was retained and the source hash was unchanged. The unverified live-profile example remained NOT_READY. The Windows launcher opened the checked system OBS installation rather than the older copy on PATH.
+
+Device acceptance remains pending: the only present microphone endpoint was the laptop array. External mic/interface, Xbox capture, BRB silence, upload performance, owned channels and a real five-minute recording are unverified. No public stream, published clip, music import or account enrollment occurred. The installed ChatGPT plugin remains v0.1.0; this repository toolkit is v0.2.0.

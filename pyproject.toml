@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "emberbanter-local-studio"
+version = "0.2.0"
+description = "Private local streaming and podcast preparation tools"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+obs = ["websockets==16.0"]
+
+[project.scripts]
+emberbanter = "tools.studio_tools:main"
+emberbanter-clips = "tools.clip_tools:main"
+
+[tool.setuptools.packages.find]
+include = ["tools"]
