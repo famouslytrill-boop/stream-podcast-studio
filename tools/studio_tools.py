@@ -72,7 +72,7 @@ def read_json(path) -> object:
     p = Path(path)
     if p.stat().st_size > 2_000_000:
         raise StudioError("Configuration exceeds 2 MB")
-    return json.loads(p.read_text(encoding="utf-8"))
+    return json.loads(p.read_text(encoding="utf-8-sig"))
 
 
 def write_new(path, data: str | bytes):
@@ -188,8 +188,8 @@ def executable(name: str) -> str:
     return result
 
 
-def run_process(args: list[str], timeout: float = 300) -> subprocess.CompletedProcess:
-    result = subprocess.run(args, stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=timeout, shell=False)
+def run_process(args: list[str], timeout: float = 300, *, cwd=None) -> subprocess.CompletedProcess:
+    result = subprocess.run(args, stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=timeout, shell=False, cwd=cwd)
     if result.returncode:
         # FFmpeg may include sensitive metadata or URLs in its logs. Do not echo it.
         raise StudioError(f"{Path(args[0]).name} failed (exit {result.returncode}); inspect the media locally")

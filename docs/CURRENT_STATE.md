@@ -19,6 +19,8 @@ Observed November 16, 2026, America/New_York. This record supersedes the older d
 
 ## Delivered source work
 
+Latest expansion: [caption editing handoff](CAPTION_HANDOFF_2026-11-16.md) records source toolkit v0.3.0, the prepared portable editor, local synthetic transcription, 15 passing tests on both computers, and the Windows UTF-8 configuration fix. Earlier six-test results below describe the initial v0.2.0 milestone.
+
 Recovered reusable scenes and core production commands; added first-show rehearsal copy, current platform research, empty measurement logs and a reviewed local clip exporter. Source is on the separate `studio/production-loop-20261116` branch.
 
 All six focused tests passed on Linux/Python 3.12.14 (3.760 seconds) and on DTG/Windows/Python 3.14.4 (17.520 seconds). They performed real synthetic-media exports in both layouts, checked selection of the non-silent second audio track, preserved the source hash, and refused unreviewed cuts and existing output folders. The unverified live-profile example correctly remained NOT_READY; its missing checks were not marked passed.
