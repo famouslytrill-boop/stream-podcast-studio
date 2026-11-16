@@ -1,0 +1,6 @@
+interface:
+  display_name: "Brand Lab"
+  short_description: "Compare names and build consistent kits"
+  default_prompt: "Use $emberbanter-brand-lab to compare the five brand directions and develop the strongest original design kit."
+policy:
+  allow_implicit_invocation: true

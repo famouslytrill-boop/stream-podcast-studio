@@ -1,0 +1,7 @@
+interface:
+  display_name: "Audio Production"
+  short_description: "Measure and export podcast audio"
+  default_prompt: "Analyze this recording and prepare a new podcast MP3 while preserving the original."
+policy:
+  allow_implicit_invocation: true
+

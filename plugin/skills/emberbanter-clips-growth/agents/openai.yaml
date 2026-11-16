@@ -1,0 +1,7 @@
+interface:
+  display_name: "Clips and Growth"
+  short_description: "Turn real moments into useful clips"
+  default_prompt: "Turn this EmberBanter recording into three honest, engaging short-clip candidates."
+policy:
+  allow_implicit_invocation: true
+

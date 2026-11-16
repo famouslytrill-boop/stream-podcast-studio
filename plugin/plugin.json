@@ -1,0 +1,37 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "email": "famouslytrill@gmail.com",
+    "name": "damian"
+  },
+  "description": "Private mobile and desktop workflows for EmberBanter streaming, podcasts, research and local production checks.",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "brandColor": "#FF6A3D",
+        "capabilities": [],
+        "category": "Creativity",
+        "composerIcon": "./assets/emberbanter-badge.png",
+        "defaultPrompt": [
+          "Plan my next EmberBanter gaming stream.",
+          "Develop an EmberBanter podcast episode with researched talking points.",
+          "Check my streaming and podcast setup and work through the remaining device tests."
+        ],
+        "developerName": "damian",
+        "displayName": "EmberBanter Studio",
+        "logo": "./assets/emberbanter-badge.png",
+        "longDescription": "Plan gaming streams and podcasts, research episode topics, check Xbox/OBS audio routing, draft clips and release copy, and use bundled local tools for software diagnostics, operator preflight, audio loudness, two-pass MP3 exports, RSS XML drafts and authenticated read-only OBS status. Chat workflows support phone and desktop. Local checks require an executing computer, Python and the relevant installed binaries; the plugin does not host an OBS bridge or automatically publish.",
+        "shortDescription": "Streaming & podcast production"
+      }
+    }
+  },
+  "keywords": [
+    "streaming",
+    "podcast",
+    "gaming",
+    "obs",
+    "emberbanter"
+  ],
+  "name": "emberbanter-studio",
+  "version": "0.2.0"
+}

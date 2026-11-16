@@ -1,0 +1,19 @@
+{
+  "_note": "SYNTHETIC SCENARIO ONLY. None of these audience, rate, cost or receipt values are measured EmberBanter results. Rates are invented inputs for arithmetic, not quoted platform payouts. Explicit zeros are assumptions.",
+  "label": "Hypothetical small studio month",
+  "data_kind": "hypothetical",
+  "currency": "USD",
+  "period": "one hypothetical month",
+  "ad_basis": "all_video_views",
+  "members": 20,
+  "net_per_member": "3.00",
+  "ad_basis_views": 10000,
+  "ad_only_net_rpm": "2.00",
+  "sponsor_net": "0.00",
+  "affiliate_net": "0.00",
+  "tips_net": "10.00",
+  "other_net": "0.00",
+  "fixed_cost": "25.00",
+  "variable_cost": "0.00",
+  "target_profit": "500.00"
+}

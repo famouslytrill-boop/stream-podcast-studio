@@ -1,0 +1,36 @@
+PRIMARY SOURCES - checked November 15, 2026 (Eastern Time)
+
+[1] OBS Quick Start / Auto-Configuration Wizard
+https://obsproject.com/kb/quick-start-guide
+
+[2] Xbox Remote Play: supported consoles and devices
+https://www.xbox.com/en-US/consoles/remote-play
+
+[3] OBS Application Audio Capture: Windows and duplicate audio
+https://obsproject.com/kb/application-audio-capture-guide
+
+[4] OBS Window Capture
+https://obsproject.com/kb/window-capture-sources
+
+[5] OBS Browser Source: local files and viewport size
+https://obsproject.com/kb/browser-source
+
+[6] OBS Sources Guide: stacking and placement
+https://obsproject.com/kb/sources-guide
+
+[7] Twitch Broadcasting Guidelines: 720p30, 3000 kbps, CBR, 2 seconds
+https://help.twitch.tv/s/article/broadcasting-guidelines?language=en_US
+
+[8] Twitch Xbox broadcast route
+https://help.twitch.tv/s/article/xbox-broadcast
+
+[9] YouTube channel profile and handle editing
+https://support.google.com/youtube/answer/2657964?hl=en
+
+[10] Twitch account creation / username availability
+https://help.twitch.tv/s/article/creating-an-account-with-twitch
+
+[11] USPTO trademark search entry point
+https://www.uspto.gov/trademarks/search
+
+The broadcasting guideline values were read from search-indexed official Twitch text; the page fetch itself rendered a help-portal error. Other tools may show updated interface labels. Numerical mic levels and upload headroom in the guide are practical starting targets, not platform requirements.

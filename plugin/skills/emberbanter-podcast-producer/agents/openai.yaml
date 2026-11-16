@@ -1,0 +1,7 @@
+interface:
+  display_name: "Podcast Producer"
+  short_description: "Build a focused, repeatable episode"
+  default_prompt: "Develop a 35-minute EmberBanter podcast pilot with a hook, questions and research."
+policy:
+  allow_implicit_invocation: true
+

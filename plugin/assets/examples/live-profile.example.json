@@ -1,0 +1,19 @@
+{
+  "profile_name": "Twitch cautious starting point; verify with OBS wizard",
+  "canvas": "1920x1080",
+  "output": "1280x720",
+  "fps": 30,
+  "video_kbps": 3000,
+  "audio_kbps": 160,
+  "measured_upload_mbps": null,
+  "operator_confirmations": {
+    "channel_confirmed": null,
+    "audio_clean": null,
+    "no_duplicate_audio": null,
+    "guest_consent": null,
+    "brb_silent": null,
+    "recording_reviewed": null,
+    "obs_stats_checked": null,
+    "rights_checked": null
+  }
+}
