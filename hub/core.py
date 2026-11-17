@@ -80,9 +80,18 @@ def probe_media(path):
 
 
 class Workspace:
-    def __init__(self, path, *, recover=True):
+    def __init__(self, path, *, recover=True, recordings_root=None):
         self.root = Path(path).expanduser().resolve()
         self.root.mkdir(parents=True, exist_ok=True)
+        config = self.root / "connections.json"
+        if recordings_root is None and config.exists():
+            if config.is_symlink() or config.stat().st_size > 8192:
+                raise StudioError("Invalid local studio connection settings")
+            recordings_root = json.loads(config.read_text(encoding="utf-8")).get("recordings_root")
+        if recordings_root is not None:
+            from hub.capture import validate_root
+            recordings_root = validate_root(str(recordings_root))
+        self.recordings_root = recordings_root
         self.file_lock = (self.root / ".hub-lock").open("a+b")
         try:
             if os.name == "nt":
@@ -148,6 +157,9 @@ class Workspace:
             self.file_lock.seek(0)
             msvcrt.locking(self.file_lock.fileno(), msvcrt.LK_UNLCK, 1)
         self.file_lock.close()
+
+    def obs_password_configured(self):
+        return bool(os.environ.get("EMBERBANTER_OBS_PASSWORD"))
 
     def log(self, event, ref):
         with self.db() as db:
@@ -271,7 +283,7 @@ class Workspace:
             params = {"session": session, "source_sha256": self.get("media", session["media_id"])["sha256"]}
             seconds = round(sum(c["end"] - c["start"] for c in session["cuts"]), 3)
             summary = f"Export {len(session['cuts'])} cut(s), {seconds:g} seconds, {session['format']}. Create a new private file; preserve the original."
-        elif kind in {"music_mix", "music_video", "midi", "engineering", "launch_app"}:
+        elif kind in {"music_mix", "music_video", "midi", "engineering", "launch_app", "episode", "edit_copy", "capture_import"}:
             from hub.workflows import prepare
             params, summary = prepare(self, kind, params)
         elif kind == "obs":
@@ -344,7 +356,7 @@ class Workspace:
             elif action["kind"] == "bumper":
                 from hub.render import render_bumper
                 result = render_bumper(self, job_id, action["params"])
-            elif action["kind"] in {"music_mix", "music_video", "midi", "engineering", "launch_app"}:
+            elif action["kind"] in {"music_mix", "music_video", "midi", "engineering", "launch_app", "episode", "edit_copy", "capture_import"}:
                 from hub.workflows import execute
                 result = execute(self, job_id, action["kind"], action["params"])
             else:

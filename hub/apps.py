@@ -12,7 +12,7 @@ APPS = {
     "obs": {"name": "OBS", "role": "Gaming, streaming and recording", "license": "GPL-2.0-or-later"},
     "blender": {"name": "Blender", "role": "3D, animation and music-video work", "license": "GPL-2.0-or-later"},
     "shotcut": {"name": "Shotcut", "role": "Nonlinear audio/video editing", "license": "GPL-3.0-or-later"},
-    "audacity": {"name": "Audacity", "role": "Audio editing", "license": "GPL-3.0"},
+    "audacity": {"name": "Audacity", "role": "Podcast and audio editing", "license": "GPL-3.0-or-later"},
     "vscode": {"name": "VS Code", "role": "Engineering workspace", "license": "Installed Microsoft distribution; source Code-OSS is MIT"},
 }
 
@@ -28,7 +28,7 @@ def resolve(app_id):
             "obs": [program / "obs-studio/bin/64bit/obs64.exe"],
             "blender": sorted((program / "Blender Foundation").glob("Blender*/blender.exe"), reverse=True),
             "shotcut": [local / "EmberBanter/apps/shotcut-26.9.27/Shotcut/shotcut.exe", program / "Shotcut/shotcut.exe"],
-            "audacity": [program / "Audacity/Audacity.exe"],
+            "audacity": sorted((local / "EmberBanter/apps/audacity-4.0.2").glob("*/bin/Audacity4.exe"), reverse=True) + [program / "Audacity/Audacity.exe"],
             "vscode": [local / "Programs/Microsoft VS Code/Code.exe"],
         }[app_id]
         return next((p.resolve() for p in paths if p.is_file() and not p.is_symlink()), None)

@@ -1,6 +1,7 @@
 import copy
 import http.client
 import json
+import os
 from pathlib import Path
 import shutil
 import subprocess
@@ -232,6 +233,22 @@ class HTTPTests(HubFixture):
         self.assertEqual(self.request("GET", "/api/state", headers={**paired,"Origin":"https://attacker.invalid"})[0], 401)
         self.assertEqual(self.request("GET", "/api/state", headers={**paired,"Host":"attacker.invalid"})[0], 401)
 
+    def test_capture_inbox_is_authenticated_and_agent_import_is_only_a_proposal(self):
+        root=Path(self.tmp.name)/"capture-folder";root.mkdir()
+        source=root/"finished.mp4";shutil.copyfile(self.source,source)
+        stamp=time.time()-10;os.utime(source,(stamp,stamp));self.ws.recordings_root=root
+        self.assertEqual(self.request("GET","/api/recordings")[0],401)
+        client=Client(self.ws.root,self.server.server_port)
+        recordings=client.call("studio_recordings",{})["recordings"]
+        self.assertEqual([r["name"] for r in recordings],["finished.mp4"])
+        action=client.call("studio_propose",{"kind":"capture_import","params":{"recording_id":recordings[0]["id"],"recording_finished_reviewed":True}})
+        self.assertEqual(action["state"],"pending")
+        self.assertEqual(len(self.ws.listing("media")),1)
+        self.assertEqual(len(self.ws.listing("jobs")),0)
+        self.assertEqual(self.request("POST","/api/approve",{"id":action["id"],"plan_sha256":action["plan_sha256"]},{"Authorization":"Bearer "+self.ws.pairing_key})[0],401)
+        for path in ("/broadcast.js","/broadcast.css"):
+            self.assertEqual(self.request("GET",path)[0],200)
+
     def test_bearer_tools_cannot_approve_or_reveal_pairing_key(self):
         auth = {"Authorization": "Bearer " + self.ws.pairing_key}
         self.assertEqual(self.request("GET", "/api/state", headers=auth)[0], 200)
@@ -268,7 +285,7 @@ class HTTPTests(HubFixture):
         self.assertEqual(client.call("studio_shell", {"command":"status"})["counts"]["projects"], 1)
         imported = client.call("studio_import", {"file":str(self.source)})
         self.assertEqual(imported["sha256"], self.item["sha256"])
-        self.assertEqual(len(client.call("studio_workflows", {})["workflows"]), 4)
+        self.assertTrue({"capture_import","edit_copy","episode"}.issubset({r["id"] for r in client.call("studio_workflows", {})["workflows"]}))
 
     def test_brand_kit_and_suite_assets_are_real(self):
         import io,zipfile

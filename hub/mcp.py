@@ -10,6 +10,7 @@ from hub import VERSION
 
 EMPTY = {"type": "object", "properties": {}, "additionalProperties": False}
 TOOLS = [
+    {"name":"studio_recordings", "description":"List stable recording snapshots in the one locally configured OBS capture folder. Nonrecursive; no arbitrary paths or automatic import.","inputSchema":EMPTY,"annotations":{"readOnlyHint":True}},
     {"name": "studio_shell", "description": "Run the deterministic studio command language: help, status, apps, projects, files, read/write revisioned notes, and prepare reviewed named workflows. This cannot execute OS commands or approve actions.", "inputSchema": {"type":"object","properties":{"command":{"type":"string"}},"required":["command"],"additionalProperties":False}, "annotations":{"destructiveHint":False,"openWorldHint":False}},
     {"name": "studio_project_save", "description": "Create or revise a music, music_video, gaming, streaming or podcast project in the personal hub.", "inputSchema":{"type":"object","properties":{"project":{"type":"object"}},"required":["project"],"additionalProperties":False},"annotations":{"destructiveHint":False,"openWorldHint":False}},
     {"name": "studio_document_read", "description": "Read a versioned studio note/lyrics/script file by its discovered ID.", "inputSchema":{"type":"object","properties":{"id":{"type":"string"}},"required":["id"],"additionalProperties":False},"annotations":{"readOnlyHint":True}},
@@ -20,7 +21,7 @@ TOOLS = [
     {"name": "studio_status", "description": "Read actual local hub software and connection state; does not record or publish.", "inputSchema": EMPTY, "annotations": {"readOnlyHint": True}},
     {"name": "studio_library", "description": "List imported recordings, saved sessions, actions and job results in the personal workspace.", "inputSchema": EMPTY, "annotations": {"readOnlyHint": True}},
     {"name": "studio_session_save", "description": "Save a non-destructive edit session. Get recording identifiers from studio_library. Review flags need the owner's actual content/caption review.", "inputSchema": {"type": "object", "properties": {"session": {"type": "object"}}, "required": ["session"], "additionalProperties": False}, "annotations": {"destructiveHint": False, "openWorldHint": False}},
-    {"name": "studio_propose", "description": "Prepare an exact edit export, music mix, music video, MIDI sketch, engineering check, installed-app launch, bumper or OBS action for owner review. This does not execute or approve.", "inputSchema": {"type": "object", "properties": {"kind": {"type": "string", "enum": ["render", "bumper", "obs", "music_mix", "music_video", "midi", "engineering", "launch_app"]}, "params": {"type": "object"}}, "required": ["kind", "params"], "additionalProperties": False}, "annotations": {"destructiveHint": False, "openWorldHint": False}},
+    {"name": "studio_propose", "description": "Prepare an exact edit export, music mix, music video, MIDI sketch, engineering check, installed-app launch, bumper or OBS action for owner review. This does not execute or approve.", "inputSchema": {"type": "object", "properties": {"kind": {"type": "string", "enum": ["render", "bumper", "obs", "music_mix", "music_video", "midi", "engineering", "launch_app", "episode", "edit_copy", "capture_import"]}, "params": {"type": "object"}}, "required": ["kind", "params"], "additionalProperties": False}, "annotations": {"destructiveHint": False, "openWorldHint": False}},
     {"name": "studio_job_status", "description": "Inspect one actual local job. Completed means its handler finished; inspect the receipt for specific evidence.", "inputSchema": {"type": "object", "properties": {"id": {"type": "string", "pattern": "^[a-f0-9]{32}$"}}, "required": ["id"], "additionalProperties": False}, "annotations": {"readOnlyHint": True}},
 ]
 
@@ -59,6 +60,8 @@ class Client:
         schema = definition["inputSchema"]
         if set(args) - set(schema["properties"]) or any(k not in args for k in schema.get("required", [])):
             raise ValueError("Unexpected or missing tool arguments")
+        if name == "studio_recordings":
+            return self.request("/api/recordings")
         if name == "studio_media_math":
             from hub.planning import media_math
             return media_math(**args)
