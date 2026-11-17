@@ -1,0 +1,94 @@
+{
+  "checked_date": "2026-11-16",
+  "timezone": "America/New_York",
+  "working_identity": "EmberBanter",
+  "replacement_selected": false,
+  "availability_claim": "unverified",
+  "directions": [
+    {
+      "name": "EmberBanter",
+      "monogram_concept": "EB",
+      "tagline": "Clock out. Queue up.",
+      "positioning": "Warm after-work gaming and conversation",
+      "palette": {
+        "background": "#101216",
+        "accent": "#FF6A3D",
+        "secondary": "#8EF2CE",
+        "text": "#F4F1E8"
+      },
+      "concept_approved": false,
+      "handle": null,
+      "domain": null,
+      "trademark_clearance": null,
+      "name_screen": "preliminary public web only; no exact conflict identified; availability unverified"
+    },
+    {
+      "name": "LumaRacket",
+      "monogram_concept": "LR",
+      "tagline": "Make some after-hours noise.",
+      "positioning": "Energetic clips and playful game nights",
+      "palette": {
+        "background": "#111327",
+        "accent": "#9A7DFF",
+        "secondary": "#D8FF62",
+        "text": "#F3F5FF"
+      },
+      "concept_approved": false,
+      "handle": null,
+      "domain": null,
+      "trademark_clearance": null,
+      "name_screen": "preliminary public web only; no exact conflict identified; availability unverified"
+    },
+    {
+      "name": "RallyVanta",
+      "monogram_concept": "RV",
+      "tagline": "Good company. Better chaos.",
+      "positioning": "Competitive games and community choices",
+      "palette": {
+        "background": "#0B1013",
+        "accent": "#32D6C5",
+        "secondary": "#FF705E",
+        "text": "#F6F2E9"
+      },
+      "concept_approved": false,
+      "handle": null,
+      "domain": null,
+      "trademark_clearance": null,
+      "name_screen": "preliminary public web only; no exact conflict identified; availability unverified"
+    },
+    {
+      "name": "MorrowMox",
+      "monogram_concept": "MM",
+      "tagline": "Stay for the next story.",
+      "positioning": "Cinematic horror and story-led conversation",
+      "palette": {
+        "background": "#15131C",
+        "accent": "#A67EDB",
+        "secondary": "#EAB766",
+        "text": "#F5ECD9"
+      },
+      "concept_approved": false,
+      "handle": null,
+      "domain": null,
+      "trademark_clearance": null,
+      "name_screen": "preliminary public web only; no exact conflict identified; availability unverified"
+    },
+    {
+      "name": "OrbitRiff",
+      "monogram_concept": "OR",
+      "tagline": "Same orbit. New stories.",
+      "positioning": "Games, culture and music conversation",
+      "palette": {
+        "background": "#10182B",
+        "accent": "#5A8CFF",
+        "secondary": "#FFAD85",
+        "text": "#EDF4FF"
+      },
+      "concept_approved": false,
+      "handle": null,
+      "domain": null,
+      "trademark_clearance": null,
+      "name_screen": "preliminary public web only; no exact conflict identified; availability unverified"
+    }
+  ]
+}

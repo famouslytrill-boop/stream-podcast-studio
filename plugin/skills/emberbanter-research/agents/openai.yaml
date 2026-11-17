@@ -1,0 +1,7 @@
+interface:
+  display_name: "Episode Research"
+  short_description: "Find current facts and better questions"
+  default_prompt: "Research a timely horror-gaming episode and give me verified facts and original talking points."
+policy:
+  allow_implicit_invocation: true
+

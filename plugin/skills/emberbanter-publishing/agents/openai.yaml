@@ -1,0 +1,7 @@
+interface:
+  display_name: "Publishing Preflight"
+  short_description: "Prepare accurate feeds and release copy"
+  default_prompt: "Prepare my episode metadata and check its RSS draft before public distribution."
+policy:
+  allow_implicit_invocation: true
+

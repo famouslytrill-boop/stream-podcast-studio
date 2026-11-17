@@ -1,0 +1,21 @@
+{
+  "_note": "Synthetic example captions and times only. Replace with your recording, real cuts and corrected source-timeline SRT before confirming review.",
+  "source": "../recordings/session-001.mkv",
+  "captions": {
+    "file": "captions.example.srt",
+    "timebase": "source",
+    "reviewed": false
+  },
+  "clips": [
+    {
+      "id": "clip-01",
+      "in_seconds": 0,
+      "out_seconds": 20,
+      "title": "Replace with the actual moment",
+      "layout": "fit",
+      "audio_stream": 0,
+      "context_reviewed": false,
+      "rights_reviewed": false
+    }
+  ]
+}

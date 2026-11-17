@@ -1,0 +1,7 @@
+interface:
+  display_name: "EmberBanter Studio"
+  short_description: "Plan streams, podcasts and production"
+  default_prompt: "Plan my next EmberBanter session and complete the most useful production task."
+policy:
+  allow_implicit_invocation: true
+

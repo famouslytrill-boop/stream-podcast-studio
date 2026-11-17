@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+.env.*
+recordings/
+outputs/
+*.mp4
+*.mkv
+*.wav
+*.mp3
+device-private/
+captions/
+models/
+*.log

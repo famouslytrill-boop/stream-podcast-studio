@@ -1,0 +1,7 @@
+1
+00:00:00,000 --> 00:00:02,000
+This is a sample caption.
+
+2
+00:00:02,200 --> 00:00:04,800
+Replace it with the actual speech.

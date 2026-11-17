@@ -1,0 +1,7 @@
+interface:
+  display_name: "Stream Setup"
+  short_description: "Set up OBS, Xbox and clean audio"
+  default_prompt: "Check my Xbox and OBS setup, especially microphone routing and BRB silence."
+policy:
+  allow_implicit_invocation: true
+

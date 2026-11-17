@@ -1,0 +1,7 @@
+interface:
+  display_name: "Studio Engineering"
+  short_description: "Install tools and verify local behavior"
+  default_prompt: "Verify my EmberBanter tooling and complete the next authorized engineering step."
+policy:
+  allow_implicit_invocation: true
+

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Growth and Economics"
+  short_description: "Plan shows and calculate honest scenarios"
+  default_prompt: "Use $emberbanter-growth-economics to build my next show experiment and a clearly labeled revenue scenario."
+policy:
+  allow_implicit_invocation: true
