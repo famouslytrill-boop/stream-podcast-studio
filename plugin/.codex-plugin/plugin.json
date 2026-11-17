@@ -3,7 +3,7 @@
     "email": "famouslytrill@gmail.com",
     "name": "damian"
   },
-  "description": "Personal music, gaming, streaming, podcast and music-video studio with a local dashboard, scoped shell and deterministic production workflows.",
+  "description": "Personal gaming, streaming and podcast studio with a capture inbox, video/audio episode editing and reviewed local workflows.",
   "interface": {
     "brandColor": "#FF6A3D",
     "capabilities": [],
@@ -17,8 +17,8 @@
     "developerName": "damian",
     "displayName": "EmberBanter Studio",
     "logo": "./assets/emberbanter-badge.png",
-    "longDescription": "Create music, gaming, streaming, podcast and music-video projects in a private local dashboard. Mix stems, create MIDI sketches, render artwork/footage music videos with waveform and chroma key, arrange cuts, correct captions, write versioned lyrics/scripts/notes, discover installed editors, and review fixed production or diagnostic workflows. Twelve local MCP tools inspect, save and propose; exact execution is reviewed in the owner hub. Includes the selected EmberBanter brand kit. Laptop execution is required. Phone control needs private HTTPS pairing; ChatGPT mobile cannot execute this local stdio package. No hosted bridge, autonomous source rewriting, full DAW control, public go-live or publishing integration is claimed.",
-    "shortDescription": "Music, games & production"
+    "longDescription": "EmberBanter Studio: Music. Games. Stories. A private laptop hub for gaming, streaming, podcasts and video/audio editing. Import finished OBS captures from one configured folder, create packet-verified MP4 editing copies, arrange multi-source episodes with chapter labels and corrected captions, and export verified MP4/WAV/MP3 packages. Discover installed editors, write versioned studio notes and run deterministic production or diagnostic workflows. Thirteen local MCP tools inspect, save and propose; exact execution is reviewed in the owner hub. Includes the selected streaming/podcast brand kit. Optional prior music tools remain application features. Laptop execution is required. Phone control needs private HTTPS; ChatGPT mobile does not execute this local stdio package. No hosted bridge, source-rewriting agent, public go-live or publishing connection is claimed.",
+    "shortDescription": "Streaming, podcasts & editing"
   },
   "keywords": [
     "music",
@@ -32,5 +32,5 @@
   ],
   "name": "emberbanter-studio",
   "skills": "./skills",
-  "version": "0.4.0"
+  "version": "0.5.0"
 }

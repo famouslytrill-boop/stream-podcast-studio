@@ -91,6 +91,7 @@ def checked_sources(ws, sources):
 def complete(ws, job_id, data, sources, outputs, duration, dimensions=None, extras=None, supplemental=None):
     checked_sources(ws, sources)
     result = finish(ws, job_id, outputs, expected_duration=duration, expected_size=dimensions)
+    checked_sources(ws, sources)
     result.update(source_preserved=True, sources=[{"id": s["id"], "sha256": s["sha256"]} for s in sources],
                   workflow="deterministic", **(extras or {}))
     directory = ws.root / "exports" / job_id

@@ -10,6 +10,7 @@ HELP = """EmberBanter studio commands
 help                         Show commands
 status                       Show actual workspace counts
 apps                         List installed studio tools
+recordings                   List snapshots in the configured capture folder
 open <app-id>                 Prepare a reviewed app launch
 projects                     List creative projects
 project <type> <title>        Create music, music_video, gaming, streaming or podcast project
@@ -31,6 +32,9 @@ def run(ws, command):
         return {"text": HELP}
     if verb == "status":
         return {"text": "Connected to your local workspace.", "counts": {k:len(ws.listing(k)) for k in ("projects","media","documents","jobs")}}
+    if verb == "recordings":
+        from hub.capture import scan
+        return scan(ws)
     if verb == "apps":
         return {"apps": inventory()}
     if verb == "projects":

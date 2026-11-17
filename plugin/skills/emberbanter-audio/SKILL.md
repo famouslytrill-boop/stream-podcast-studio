@@ -17,3 +17,5 @@ Report actual integrated loudness, true peak, sample/channel format, analyzed sc
 
 
 For the v0.5 music mixer or MIDI sketches, read [creative-suite contracts](../../references/creative-suite.md). Discover the executing laptop and real imported stems. Preserve its exact trim, offset, gain and stereo-balance settings; require source-content and permissions review. Target loudness and a decode receipt do not establish mastering quality. MIDI carries note data and its guide tone is not a finished instrument production. Do not claim FLP creation or actual DAW edits from a launcher or MIDI export.
+
+For podcast/video episode assembly, read [broadcast workflows](../../references/broadcast-workflows.md). Use an episode proposal with reviewed source IDs, track choices, segment bounds/order, final-timeline captions and optional fixed voice processing. Audacity 4.0.2 portable was installed/launched on DTG with verified official archive checksum and valid executable signature; no native Audacity editing or scripting API acceptance is established.

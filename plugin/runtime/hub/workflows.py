@@ -9,6 +9,9 @@ from hub.core import digest
 from tools.studio_tools import StudioError, doctor
 
 RECIPES = [
+    {"id": "capture_import", "name": "Import a finished OBS capture", "steps": ["Select a finished file snapshot", "Copy and verify source stability", "Register protected media and receipt"]},
+    {"id": "edit_copy", "name": "Prepare an editing copy", "steps": ["Verify source and codec compatibility", "Remux without re-encoding", "Compare compressed streams", "Decode and package"]},
+    {"id": "episode", "name": "Finish a podcast or video episode", "steps": ["Verify source recordings", "Arrange reviewed segments", "Finish audio", "Build chapters and companion files", "Decode and package"]},
     {"id": "music_mix", "name": "Finish a music mix", "steps": ["Verify stems", "Trim, align and mix", "Measure and render", "Decode and package"]},
     {"id": "music_video", "name": "Build a music video", "steps": ["Verify song and visuals", "Compose artwork/footage and optional chroma key", "Render", "Decode and package"]},
     {"id": "midi", "name": "Make a MIDI sketch", "steps": ["Plan tempo and note grid", "Write MIDI and guide", "Verify files"]},
@@ -17,6 +20,18 @@ RECIPES = [
 
 
 def prepare(ws, kind, data):
+    if kind == "capture_import":
+        from hub.capture import prepare as capture_prepare
+        clean = capture_prepare(ws,data)
+        return clean, f"Import the reviewed finished capture {clean['recording']['name']} ({clean['recording']['bytes']} bytes). Create a protected copy; preserve the original."
+    if kind == "edit_copy":
+        from hub.broadcast import prepare_edit_copy
+        clean = prepare_edit_copy(ws,data)
+        return clean, f"Create a new MP4 editing copy of {clean['name']} without re-encoding. Verify compressed video and all {len(clean['audio_codecs'])} audio stream(s), then decode."
+    if kind == "episode":
+        from hub.broadcast import prepare_episode
+        clean = prepare_episode(ws,data)
+        return clean, f"Assemble {len(clean['clips'])} reviewed segment(s), {clean['duration']:g}s, {clean['format']}. Target {clean['target_lufs']:g} LUFS; speech cleanup {'on' if clean['speech_cleanup'] else 'off'}. Create private chaptered delivery and audio companions."
     if kind == "music_mix":
         from hub.creative import prepare_mix
         clean = prepare_mix(ws, data)
@@ -70,6 +85,15 @@ def engineering(ws, job_id):
 
 
 def execute(ws, job_id, kind, data):
+    if kind == "capture_import":
+        from hub.capture import import_capture
+        return import_capture(ws,job_id,data)
+    if kind == "edit_copy":
+        from hub.broadcast import edit_copy
+        return edit_copy(ws,job_id,data)
+    if kind == "episode":
+        from hub.broadcast import episode
+        return episode(ws,job_id,data)
     if kind == "music_mix":
         from hub.creative import mix
         return mix(ws, job_id, data)

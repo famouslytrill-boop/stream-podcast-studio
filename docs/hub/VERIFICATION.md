@@ -1,3 +1,11 @@
+# Broadcast verification — November 17, 2026
+
+Toolkit v0.6.0; account plugin source v0.5.0. **65 Linux tests and 65 Windows tests passed.** Actual browser UI verified capture import, two-source chaptered episode and two-audio-track packet-verified editing copy; no exceptions or horizontal overflow in five checked phone views. Audacity 4.0.2 portable checksum/signature and running window were verified. [Detailed scope and limits](BROADCAST_0.6.0.md#verification).
+
+The records below describe earlier milestones.
+
+---
+
 # Creative suite verification — November 17, 2026
 
 Toolkit v0.5.0; account plugin source v0.4.0. Linux **55/55** tests and DTG Windows **55/55** tests passed. Actual Chrome UI produced a two-stem mix, MIDI sketch, music video and engineering report through exact owner-review screens, created projects and a real document revision, and downloaded the 3,422,773-byte brand kit. No page exceptions or horizontal overflow across eight checked phone views. Synthetic media only; no physical mic/Xbox, OBS mutation or publication. See [full evidence and visual fidelity](CREATIVE_SUITE_2026-11-17.md#algorithms-and-measured-evidence).

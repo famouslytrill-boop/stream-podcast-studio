@@ -156,6 +156,7 @@ class Handler(BaseHTTPRequestHandler):
                                      "media": ws.listing("media"), "sessions": sessions, "jobs": ws.listing("jobs"),
                                      "projects": ws.listing("projects"), "documents": ws.listing("documents"),
                                      "apps": inventory(), "workflows": RECIPES,
+                                     "recordings_folder_configured": ws.recordings_root is not None,
                                      "actions": [a for a in ws.listing("actions") if a["state"] == "pending" and a["expires"] > time.time()],
                                      "software": {k: v["found"] for k, v in binary["binaries"].items()},
                                      "phone_origin": self.server.public_origin, "obs_password_configured": bool(os.environ.get("EMBERBANTER_OBS_PASSWORD")),
@@ -169,6 +170,9 @@ class Handler(BaseHTTPRequestHandler):
                     content = archive()
                     self.headers_for(200, len(content), "application/zip", {"Content-Disposition": 'attachment; filename="EmberBanter_Brand_Kit.zip"'})
                     self.wfile.write(content)
+                elif path == "/api/recordings":
+                    from hub.capture import scan
+                    self.reply(200, scan(ws))
                 elif path == "/api/obs":
                     from hub.obs import status
                     self.reply(200, status())
@@ -192,7 +196,7 @@ class Handler(BaseHTTPRequestHandler):
                 else:
                     self.reply(404, {"error": "Unknown studio route"})
                 return
-            names = {"/": "index.html", "/index.html": "index.html", "/app.js": "app.js", "/suite.js": "suite.js", "/style.css": "style.css", "/suite.css": "suite.css",
+            names = {"/": "index.html", "/index.html": "index.html", "/app.js": "app.js", "/suite.js": "suite.js", "/style.css": "style.css", "/suite.css": "suite.css", "/broadcast.js": "broadcast.js", "/broadcast.css": "broadcast.css",
                      "/manifest.webmanifest": "manifest.webmanifest", "/sw.js": "sw.js", "/icon.svg": "icon.svg",
                      "/brand-kits.json": "brand-kits.json", "/icon-192.png": "icon-192.png", "/icon-512.png": "icon-512.png"}
             brand_root = WEB / "brand"
@@ -331,11 +335,12 @@ def main(argv=None):
     parser.add_argument("--workspace", default=str(Path.home() / "Documents" / "EmberBanterHub"))
     parser.add_argument("--port", type=int, default=8765)
     parser.add_argument("--public-origin", help="Verified private HTTPS phone origin; does not create a tunnel")
+    parser.add_argument("--recordings-root", help="Explicit local OBS recordings folder; nonrecursive and no automatic import")
     parser.add_argument("--open", action="store_true", help="Open and pair the laptop's browser privately")
     args = parser.parse_args(argv)
     if not 1024 <= args.port <= 65535:
         parser.error("Use a port from 1024 to 65535")
-    ws = Workspace(args.workspace)
+    ws = Workspace(args.workspace, recordings_root=args.recordings_root)
     try:
         server = StudioServer(ws, args.port, args.public_origin)
         print(f"EmberBanter Studio {VERSION}: http://127.0.0.1:{args.port}", flush=True)
