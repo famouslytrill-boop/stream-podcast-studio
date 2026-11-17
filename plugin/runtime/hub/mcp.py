@@ -10,6 +10,15 @@ from hub import VERSION
 
 EMPTY = {"type": "object", "properties": {}, "additionalProperties": False}
 TOOLS = [
+    {"name":"studio_voices","description":"List local installed narration voices. No remote generation or voice cloning.","inputSchema":EMPTY,"annotations":{"readOnlyHint":True}},
+    {"name":"studio_platforms","description":"List official manual platform handoff portals and actual concurrency limits. No connected upload API is implied.","inputSchema":EMPTY,"annotations":{"readOnlyHint":True}},
+    {"name":"studio_history","description":"Read persisted job history and repair guidance, in pages of 50.","inputSchema":{"type":"object","properties":{"offset":{"type":"integer","minimum":0,"maximum":100000}},"additionalProperties":False},"annotations":{"readOnlyHint":True}},
+    {"name":"studio_replay","description":"Prepare a NEW exact owner review for an eligible previous file job. Never approves or automatically replays OBS actions, launches or imports.","inputSchema":{"type":"object","properties":{"id":{"type":"string"}},"required":["id"],"additionalProperties":False},"annotations":{"destructiveHint":False,"openWorldHint":False}},
+    {"name":"studio_storyboard_save","description":"Save a versioned scene plan with title, text, timing and imported visual IDs. Current document_id/revision required on edits. Does not render.","inputSchema":{"type":"object","properties":{"plan":{"type":"object"}},"required":["plan"],"additionalProperties":False},"annotations":{"destructiveHint":False,"openWorldHint":False}},
+    {"name":"studio_storyboard_read","description":"Read an actual saved storyboard by its document ID.","inputSchema":{"type":"object","properties":{"id":{"type":"string"}},"required":["id"],"additionalProperties":False},"annotations":{"readOnlyHint":True}},
+    {"name":"studio_performance_plan","description":"Calculate direct-stream upload and frame budgets from explicit supplied bitrates. Missing measured upload stays unknown. Does not configure live services.","inputSchema":{"type":"object","properties":{"plan":{"type":"object"}},"required":["plan"],"additionalProperties":False},"annotations":{"readOnlyHint":True}},
+    {"name":"studio_hardware","description":"Read local OS, logical CPU count and available Windows GPU/display evidence; HDR remains unverified.","inputSchema":EMPTY,"annotations":{"readOnlyHint":True}},
+    {"name":"studio_recordings", "description":"List stable recording snapshots in the one locally configured OBS capture folder. Nonrecursive; no arbitrary paths or automatic import.","inputSchema":EMPTY,"annotations":{"readOnlyHint":True}},
     {"name": "studio_shell", "description": "Run the deterministic studio command language: help, status, apps, projects, files, read/write revisioned notes, and prepare reviewed named workflows. This cannot execute OS commands or approve actions.", "inputSchema": {"type":"object","properties":{"command":{"type":"string"}},"required":["command"],"additionalProperties":False}, "annotations":{"destructiveHint":False,"openWorldHint":False}},
     {"name": "studio_project_save", "description": "Create or revise a music, music_video, gaming, streaming or podcast project in the personal hub.", "inputSchema":{"type":"object","properties":{"project":{"type":"object"}},"required":["project"],"additionalProperties":False},"annotations":{"destructiveHint":False,"openWorldHint":False}},
     {"name": "studio_document_read", "description": "Read a versioned studio note/lyrics/script file by its discovered ID.", "inputSchema":{"type":"object","properties":{"id":{"type":"string"}},"required":["id"],"additionalProperties":False},"annotations":{"readOnlyHint":True}},
@@ -20,7 +29,7 @@ TOOLS = [
     {"name": "studio_status", "description": "Read actual local hub software and connection state; does not record or publish.", "inputSchema": EMPTY, "annotations": {"readOnlyHint": True}},
     {"name": "studio_library", "description": "List imported recordings, saved sessions, actions and job results in the personal workspace.", "inputSchema": EMPTY, "annotations": {"readOnlyHint": True}},
     {"name": "studio_session_save", "description": "Save a non-destructive edit session. Get recording identifiers from studio_library. Review flags need the owner's actual content/caption review.", "inputSchema": {"type": "object", "properties": {"session": {"type": "object"}}, "required": ["session"], "additionalProperties": False}, "annotations": {"destructiveHint": False, "openWorldHint": False}},
-    {"name": "studio_propose", "description": "Prepare an exact edit export, music mix, music video, MIDI sketch, engineering check, installed-app launch, bumper or OBS action for owner review. This does not execute or approve.", "inputSchema": {"type": "object", "properties": {"kind": {"type": "string", "enum": ["render", "bumper", "obs", "music_mix", "music_video", "midi", "engineering", "launch_app"]}, "params": {"type": "object"}}, "required": ["kind", "params"], "additionalProperties": False}, "annotations": {"destructiveHint": False, "openWorldHint": False}},
+    {"name": "studio_propose", "description": "Prepare exact local narration, storyboard films, private platform handoff drafts, encoder checks, capture import, verified MP4 editing copy, chaptered episode, edit export, music mix/video, MIDI sketch, diagnostic check, named-app launch, bumper or OBS action for owner review. This does not execute or approve.", "inputSchema": {"type": "object", "properties": {"kind": {"type": "string", "enum": ["render", "bumper", "obs", "music_mix", "music_video", "midi", "engineering", "launch_app", "episode", "edit_copy", "capture_import", "narration", "storyboard", "delivery_pack", "performance"]}, "params": {"type": "object"}}, "required": ["kind", "params"], "additionalProperties": False}, "annotations": {"destructiveHint": False, "openWorldHint": False}},
     {"name": "studio_job_status", "description": "Inspect one actual local job. Completed means its handler finished; inspect the receipt for specific evidence.", "inputSchema": {"type": "object", "properties": {"id": {"type": "string", "pattern": "^[a-f0-9]{32}$"}}, "required": ["id"], "additionalProperties": False}, "annotations": {"readOnlyHint": True}},
 ]
 
@@ -59,6 +68,27 @@ class Client:
         schema = definition["inputSchema"]
         if set(args) - set(schema["properties"]) or any(k not in args for k in schema.get("required", [])):
             raise ValueError("Unexpected or missing tool arguments")
+        if name in {"studio_voices","studio_platforms","studio_hardware"}:
+            return self.request({"studio_voices":"/api/voices","studio_platforms":"/api/platforms","studio_hardware":"/api/hardware"}[name])
+        if name == "studio_history":
+            from hub.recovery import history
+            offset=args.get("offset",0)
+            if type(offset) is not int or not 0<=offset<=100000:raise ValueError("Invalid history offset")
+            return self.request("/api/history?offset="+str(offset))
+        if name == "studio_replay":
+            return self.request("/api/replay",args)
+        if name == "studio_storyboard_save":
+            return self.request("/api/storyboards",args["plan"])
+        if name == "studio_storyboard_read":
+            from hub.core import identifier
+            return self.request("/api/storyboard?id="+identifier(args["id"]))
+        if name == "studio_performance_plan":
+            return self.request("/api/performance-plan",args["plan"])
+        if name == "studio_job_status":
+            from hub.core import identifier
+            return self.request("/api/job?id="+identifier(args["id"]))
+        if name == "studio_recordings":
+            return self.request("/api/recordings")
         if name == "studio_media_math":
             from hub.planning import media_math
             return media_math(**args)
@@ -84,10 +114,7 @@ class Client:
             return {k: state[k] for k in ("media", "sessions", "jobs", "actions", "projects", "documents")}
         if name == "studio_workflows":
             return {"workflows": state["workflows"]}
-        result = next((j for j in state["jobs"] if j["id"] == args["id"]), None)
-        if not result:
-            raise ValueError("Job not found in the current workspace result window")
-        return result
+        raise ValueError("Unknown studio tool")
 
     def import_file(self, filename):
         import http.client

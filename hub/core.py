@@ -80,9 +80,18 @@ def probe_media(path):
 
 
 class Workspace:
-    def __init__(self, path, *, recover=True):
+    def __init__(self, path, *, recover=True, recordings_root=None):
         self.root = Path(path).expanduser().resolve()
         self.root.mkdir(parents=True, exist_ok=True)
+        config = self.root / "connections.json"
+        if recordings_root is None and config.exists():
+            if config.is_symlink() or config.stat().st_size > 8192:
+                raise StudioError("Invalid local studio connection settings")
+            recordings_root = json.loads(config.read_text(encoding="utf-8")).get("recordings_root")
+        if recordings_root is not None:
+            from hub.capture import validate_root
+            recordings_root = validate_root(str(recordings_root))
+        self.recordings_root = recordings_root
         self.file_lock = (self.root / ".hub-lock").open("a+b")
         try:
             if os.name == "nt":
@@ -148,6 +157,9 @@ class Workspace:
             self.file_lock.seek(0)
             msvcrt.locking(self.file_lock.fileno(), msvcrt.LK_UNLCK, 1)
         self.file_lock.close()
+
+    def obs_password_configured(self):
+        return bool(os.environ.get("EMBERBANTER_OBS_PASSWORD"))
 
     def log(self, event, ref):
         with self.db() as db:
@@ -258,7 +270,7 @@ class Workspace:
         self.log("session.saved", session_id)
         return clean
 
-    def propose(self, kind, params):
+    def propose(self, kind, params, *, replay_of=None):
         if not isinstance(params, dict):
             raise StudioError("Action parameters must be an object")
         if kind == "render":
@@ -271,7 +283,7 @@ class Workspace:
             params = {"session": session, "source_sha256": self.get("media", session["media_id"])["sha256"]}
             seconds = round(sum(c["end"] - c["start"] for c in session["cuts"]), 3)
             summary = f"Export {len(session['cuts'])} cut(s), {seconds:g} seconds, {session['format']}. Create a new private file; preserve the original."
-        elif kind in {"music_mix", "music_video", "midi", "engineering", "launch_app"}:
+        elif kind in {"music_mix", "music_video", "midi", "engineering", "launch_app", "episode", "edit_copy", "capture_import", "narration", "storyboard", "performance", "delivery_pack"}:
             from hub.workflows import prepare
             params, summary = prepare(self, kind, params)
         elif kind == "obs":
@@ -297,6 +309,8 @@ class Workspace:
         action_id = uuid.uuid4().hex
         body = {"id": action_id, "kind": kind, "params": params, "summary": summary,
                 "expires": time.time() + 180, "created": time.time()}
+        if replay_of is not None:
+            body["replay_of"] = identifier(replay_of)
         body["plan_sha256"] = hashlib.sha256(canonical(body).encode()).hexdigest()
         with self.db() as db:
             db.execute("INSERT INTO actions VALUES(?,?,?)", (action_id, canonical(body), "pending"))
@@ -322,11 +336,17 @@ class Workspace:
                 saved = self.get("sessions", action["params"]["session"]["id"])
                 if saved["revision"] != action["params"]["session"]["revision"]:
                     raise StudioError("Session changed after the proposal. Review a new export")
+            if action["kind"] == "storyboard" and action["params"].get("document_id"):
+                from hub.projects import read_document
+                if read_document(self, action["params"]["document_id"])["revision"] != action["params"]["revision"]:
+                    raise StudioError("Storyboard changed after the proposal. Review a new render")
             count = db.execute("SELECT count(*) FROM jobs WHERE state IN ('queued','running')").fetchone()[0]
             if count >= 4:
                 raise StudioError("Four jobs are already waiting. Let them finish first")
             job_id = uuid.uuid4().hex
             job = {"id": job_id, "action_id": action_id, "kind": action["kind"], "summary": action["summary"], "created": time.time()}
+            if action.get("replay_of"):
+                job["replay_of"] = action["replay_of"]
             db.execute("UPDATE actions SET state='consumed' WHERE id=?", (action_id,))
             db.execute("INSERT INTO jobs VALUES(?,?,?)", (job_id, canonical(job), "queued"))
         self.log("action.owner_approved", action_id)
@@ -344,7 +364,7 @@ class Workspace:
             elif action["kind"] == "bumper":
                 from hub.render import render_bumper
                 result = render_bumper(self, job_id, action["params"])
-            elif action["kind"] in {"music_mix", "music_video", "midi", "engineering", "launch_app"}:
+            elif action["kind"] in {"music_mix", "music_video", "midi", "engineering", "launch_app", "episode", "edit_copy", "capture_import", "narration", "storyboard", "performance", "delivery_pack"}:
                 from hub.workflows import execute
                 result = execute(self, job_id, action["kind"], action["params"])
             else:

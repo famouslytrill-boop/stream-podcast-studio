@@ -21,3 +21,5 @@ Brand files: [existing scene kit](../../assets/brand/START_HERE.txt). Research a
 For the personal recording/editing control hub, use [creator hub](../emberbanter-creator-hub/SKILL.md). Legacy studio_tools.py remains read-only for OBS; the separate hub supports reviewed recording/scene/mixer writes. Local stdio tools and paired-phone PWA access require actual runtime connections.
 
 The owner-selected identity is EmberBanter across the entire hub. For music, music-video, projects, lyrics/scripts/notes, command shell, deterministic automation and downloadable brand assets, route to [creator hub](../emberbanter-creator-hub/SKILL.md) and its creative-suite contracts.
+
+Read [creative control](../../references/creative-control.md) for current implemented engines, repair/replay rules and service boundaries. Use [brand and market research](../../references/brand-market-2026-11-17.md) for primary sources, exact identity and evidence-based audience experiments. Recheck time-sensitive provider rules. Do not infer an account connection from plugin discovery or a package release.

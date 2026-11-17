@@ -1,0 +1,6 @@
+interface:
+  display_name: "Creative Control"
+  short_description: "Narration, storyboards and reviewed recovery"
+  default_prompt: "Build my next EmberBanter scene plan and verify the actual production pathway."
+policy:
+  allow_implicit_invocation: true

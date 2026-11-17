@@ -3,7 +3,7 @@
     "email": "famouslytrill@gmail.com",
     "name": "damian"
   },
-  "description": "Personal music, gaming, streaming, podcast and music-video studio with a local dashboard, scoped shell and deterministic production workflows.",
+  "description": "Personal gaming, streaming and podcast studio with local narration, storyboards, platform handoff drafts and reviewed workflows.",
   "interface": {
     "brandColor": "#FF6A3D",
     "capabilities": [],
@@ -17,8 +17,8 @@
     "developerName": "damian",
     "displayName": "EmberBanter Studio",
     "logo": "./assets/emberbanter-badge.png",
-    "longDescription": "Create music, gaming, streaming, podcast and music-video projects in a private local dashboard. Mix stems, create MIDI sketches, render artwork/footage music videos with waveform and chroma key, arrange cuts, correct captions, write versioned lyrics/scripts/notes, discover installed editors, and review fixed production or diagnostic workflows. Twelve local MCP tools inspect, save and propose; exact execution is reviewed in the owner hub. Includes the selected EmberBanter brand kit. Laptop execution is required. Phone control needs private HTTPS pairing; ChatGPT mobile cannot execute this local stdio package. No hosted bridge, autonomous source rewriting, full DAW control, public go-live or publishing integration is claimed.",
-    "shortDescription": "Music, games & production"
+    "longDescription": "EmberBanter Studio: Music. Games. Stories. A private laptop creator hub for gaming, streaming and podcasts. Generate narration from installed Windows voices; save and render reviewed storyboards with title motion, imported visuals and optional local speech. Import finished OBS captures, prepare verified editing copies and chaptered MP4/WAV/MP3 episodes. Prepare script, message, metadata and optional calendar drafts for official platform portals. Inspect persisted history and prepare a freshly reviewed file-job replay. Measure actual bounded CPU/GPU encoder attempts. Twenty-one local MCP tools inspect, save and propose; the owner reviews exact execution in the hub. Includes the selected Gaming/Streaming/Podcasts brand kit; editing and prior music tools remain app capabilities. Laptop execution is required. Phone access needs private HTTPS. No hosted mobile bridge, source-rewriting agent, public go-live, upload, messaging or platform scheduling API is connected.",
+    "shortDescription": "Gaming, streaming & podcasts"
   },
   "keywords": [
     "music",
@@ -28,9 +28,12 @@
     "gaming",
     "obs",
     "automation",
-    "emberbanter"
+    "emberbanter",
+    "storyboard",
+    "narration",
+    "recovery"
   ],
   "name": "emberbanter-studio",
   "skills": "./skills",
-  "version": "0.4.0"
+  "version": "0.6.0"
 }

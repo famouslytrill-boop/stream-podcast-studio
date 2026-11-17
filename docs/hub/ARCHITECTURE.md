@@ -1,6 +1,6 @@
-# Personal creator hub — v0.5.0
+# Personal creator hub — v0.7.0
 
-Updated November 17, 2026, America/New_York. Selected identity: EmberBanter Studio. Account plugin is a separate release, v0.4.0. See [creative suite](CREATIVE_SUITE_2026-11-17.md) for the new music, video, shell, automation and branding contracts.
+Updated November 17, 2026, America/New_York. Selected identity: EmberBanter Studio. Account plugin is a separate release, v0.6.0. See [creative suite](CREATIVE_SUITE_2026-11-17.md) for the new music, video, shell, automation and branding contracts.
 
 The laptop owns capture and media computation. A phone is a responsive remote control paired over an explicitly configured private HTTPS origin. Local MCP access is a separate connection from the phone web app. Loading a skill does not create a device bridge.
 
@@ -24,7 +24,7 @@ The frontend uses framework-free ES modules/CSS and the existing Python runtime.
 | --- | --- |
 | Service | Binds only to 127.0.0.1; validates Host and Origin. Optional explicit HTTPS proxy hostname creates no tunnel. |
 | Pairing | Private random key, HttpOnly/SameSite Strict 12-hour cookies, Secure on configured HTTPS, CSRF-protected writes, limited pairing attempts. |
-| Agent | Twelve local stdio tools: previous six plus shell, projects, document read/write, workflow discovery and selected-local-file import. No approval tool. API denies bearer approval/key retrieval. This does not isolate arbitrary programs already running as the OS user. |
+| Agent | Twenty-one local stdio tools: previous six plus shell, projects, document read/write, workflow discovery selected-local-file import and recording-folder snapshots. No approval tool. API denies bearer approval/key retrieval. This does not isolate arbitrary programs already running as the OS user. |
 | Imports | ID-scoped protected copies, SHA-256 provenance, 2 GiB upload cap and 12-hour duration cap. Artwork PNG/JPEG/WebP is limited to 20 MB/8192px and decoded before import. No browser-supplied filesystem paths or FFmpeg filter strings. |
 | Edits | SQLite revision checks; up to 12 cuts and three-hour output. One source and one explicitly chosen audio track. Corrected source-timeline SRT is rebased after editing. |
 | Approval | Immutable action ID/hash, three-minute expiry and one use. Changed session revisions invalidate pending export approval. |
@@ -40,6 +40,8 @@ Default workspace: `~/Documents/EmberBanterHub`, outside Git. This is a personal
 
 Available now: import and preview compatible audio/video; reorder/duplicate/remove cuts; save/reopen edits; corrected burned captions and SRT; landscape 720p and vertical 1080p H.264/AAC; two-pass measured podcast MP3; four-second title bumper and original synthesized E4–G4–B4 motif; browser microphone takes; reviewed OBS start/stop/pause/resume, scenes, input mute and level proposals. OBS needs the privately configured password and actual acceptance. Scene/mixer changes affect an already-live broadcast; this hub cannot start one.
 
+Current additions: [creator control contracts](CREATOR_CONTROL_0.7.0.md). History supports a fresh reviewed file-job proposal; it never automatically retries side effects. Local narration, scene films and draft platform packs are distinct from native editor control and account delivery.
+
 ## SONARA adoption and provenance
 
 Inspected read-only at `famouslytrill-boop/sonara-os@1693036c4e50b6b4d15db5b4943752cac5552b6d`. No SONARA systems, code, protections, deployments, databases or credentials changed.
@@ -54,6 +56,10 @@ Inspected read-only at `famouslytrill-boop/sonara-os@1693036c4e50b6b4d15db5b4943
 | Existing studio v0.3.0 | Tested SRT/ASS writer, OBS authentication proof, two-pass MP3 routine and scene graphics. | Synthetic evidence does not establish real microphone/Xbox quality. |
 
 Equations: `duration = frames / fps`; `MiB = bitrate_bits_per_second × seconds / (8 × 1048576)`; `render_seconds = frames / measured_fps + overhead`. Units are explicit. Payload excludes container overhead and does not predict variable CRF output exactly. No render ETA is invented without measured speed. Existing subjective clip scoring and missing-data-safe economics remain unchanged.
+
+## Broadcast extension
+
+The [v0.6 contracts](BROADCAST_0.6.0.md) add a scoped recording inbox, reviewed stable-copy ingestion, stream-hash verified MP4 remux, multi-source episode/chapter assembly, audio companions and an installed portable Audacity editor. Public brand focus is gaming, streaming, podcasts and video/audio editing; Music. Games. Stories. remains.
 
 ## Next extensions
 
