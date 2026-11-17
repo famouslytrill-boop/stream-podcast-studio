@@ -6,6 +6,8 @@ Personal gaming, streaming and podcast studio with video/audio editing, local to
 EmberBanter — **Clock out. Queue up.** Chosen studio identity. Handles and domains are not confirmed.
 
 - [Creator control: narration, storyboards, platform handoffs and history](docs/hub/CREATOR_CONTROL_0.7.0.md)
+- [Hardware-to-publication setup](docs/hub/HARDWARE_TO_PUBLISH.md)
+- [Creator control tests and actual laptop installation](docs/hub/CREATOR_CONTROL_VERIFICATION.md)
 - [Current names, palette, audience and platform research](docs/hub/BRAND_AND_MARKET_2026-11-17.md)
 - [OBS capture inbox, editing copies and episode delivery](docs/hub/BROADCAST_0.6.0.md)
 - [Creative suite, shell, automation and exact brand kit](docs/hub/CREATIVE_SUITE_2026-11-17.md)

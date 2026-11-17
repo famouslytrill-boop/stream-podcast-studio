@@ -18,3 +18,5 @@ For capacity, call studio_hardware and studio_performance_plan with explicit kbp
 For repair, inspect studio_history and the job receipt. Preserve sources, identify cause and correct inputs. studio_replay only prepares a new exact owner review for an eligible file job. It never executes on its own, silently adopts changed inputs, or repeats OBS controls/launches/capture imports. Use a current plan when a saved revision or capability changed. Do not approve for the owner or retry ambiguous external side effects.
 
 Read actual job evidence after execution. Separate generated private files, editorial review, device rehearsal, account eligibility and external delivery. Read [brand/market research](../../references/brand-market-2026-11-17.md) for dated primary evidence. Preserve EmberBanter, Music. Games. Stories. and the Gaming/Streaming/Podcasts-only public kit.
+
+For start-to-finish setup, follow [hardware to publication](../../references/hardware-to-publish.md), verifying each actual device and account acceptance gate.
