@@ -1,3 +1,5 @@
+Current prepared 0.8.0 extension: [persistent private OBS setup, diagnostics and owner rehearsal reports](rehearsal-readiness.md). Laptop upgrade/native acceptance pending while DTG is offline. Existing instructions below remain applicable where not extended.
+
 # Hardware to first finished episode
 
 Use the owner’s current microphone/interface/Xbox models, not guessed hardware. The November 17 visual guide accompanies this release; account and physical device acceptance remain separate from synthetic test evidence.

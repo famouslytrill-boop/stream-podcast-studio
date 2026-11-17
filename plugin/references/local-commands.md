@@ -1,3 +1,5 @@
+Current prepared 0.8.0 extension: [persistent private OBS setup, diagnostics and owner rehearsal reports](rehearsal-readiness.md). Laptop upgrade/native acceptance pending while DTG is offline. Existing instructions below remain applicable where not extended.
+
 # Local tools
 
 The canonical executable is bundled at skills/emberbanter-engineering/scripts/studio_tools.py, relative to the plugin root. Resolve the actual installed path; don't assume a sandbox path persists on the owner's computer. Python 3.11+ is needed. The source repository also installs the command `emberbanter` into its virtual environment.
@@ -44,4 +46,4 @@ The first example is visibly hypothetical, not an account forecast; receipt/cost
 
 ## Personal creator hub
 
-See [creator-hub.md](creator-hub.md). From a real source checkout use `python -m hub.server --open`; from this plugin use the resolved `runtime/serve_hub.py` path. The separate hub imports media, records browser takes and performs exact owner-reviewed OBS recording/scene/mixer writes. `studio_tools.py` remains read-only. Local MCP offers six tools and no approval tool; it requires a compatible local host. Neither runtime connects publishing or starts a public stream.
+See [creator-hub.md](creator-hub.md). From a real source checkout use `python -m hub.server --open`; from this plugin use the resolved `runtime/serve_hub.py` path. The separate hub imports media, records browser takes and performs exact owner-reviewed OBS recording/scene/mixer writes. `studio_tools.py` remains read-only. Local MCP offers twenty-three tools and no approval tool; it requires a compatible local host. Neither runtime connects publishing or starts a public stream.

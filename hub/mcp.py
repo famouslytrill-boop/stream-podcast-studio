@@ -10,6 +10,8 @@ from hub import VERSION
 
 EMPTY = {"type": "object", "properties": {}, "additionalProperties": False}
 TOOLS = [
+    {"name":"studio_readiness","description":"Run read-only local setup diagnostics. Distinguish connection health, owner-reported rehearsal and unverified physical hardware. No passwords or recording/OBS mutations.","inputSchema":EMPTY,"annotations":{"readOnlyHint":True}},
+    {"name":"studio_rehearsals","description":"Read saved owner-reported rehearsal observations and required checks. An agent cannot create or approve these reports.","inputSchema":EMPTY,"annotations":{"readOnlyHint":True}},
     {"name":"studio_voices","description":"List local installed narration voices. No remote generation or voice cloning.","inputSchema":EMPTY,"annotations":{"readOnlyHint":True}},
     {"name":"studio_platforms","description":"List official manual platform handoff portals and actual concurrency limits. No connected upload API is implied.","inputSchema":EMPTY,"annotations":{"readOnlyHint":True}},
     {"name":"studio_history","description":"Read persisted job history and repair guidance, in pages of 50.","inputSchema":{"type":"object","properties":{"offset":{"type":"integer","minimum":0,"maximum":100000}},"additionalProperties":False},"annotations":{"readOnlyHint":True}},
@@ -51,6 +53,8 @@ class Client:
             with build_opener(ProxyHandler({})).open(req, timeout=45) as response:
                 return json.load(response)
         except HTTPError as error:
+            if error.code==404 and route.split("?",1)[0] in {"/api/readiness","/api/rehearsals"}:
+                raise ValueError("Setup tools require Creator Hub 0.8.0 or newer on the laptop. Existing tools can still inspect the older hub") from None
             try:
                 message = json.load(error).get("error", "Local command failed")
             except Exception:
@@ -68,6 +72,8 @@ class Client:
         schema = definition["inputSchema"]
         if set(args) - set(schema["properties"]) or any(k not in args for k in schema.get("required", [])):
             raise ValueError("Unexpected or missing tool arguments")
+        if name == "studio_readiness":return self.request("/api/readiness")
+        if name == "studio_rehearsals":return self.request("/api/rehearsals")
         if name in {"studio_voices","studio_platforms","studio_hardware"}:
             return self.request({"studio_voices":"/api/voices","studio_platforms":"/api/platforms","studio_hardware":"/api/hardware"}[name])
         if name == "studio_history":

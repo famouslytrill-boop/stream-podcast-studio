@@ -1,0 +1,16 @@
+{
+  "result": "passed",
+  "method": "JSDOM event handlers against actual isolated HTTP server",
+  "visual_browser_tested": false,
+  "real_device_tested": false,
+  "default_checks_unconfirmed": true,
+  "gaming_checks": 9,
+  "podcast_checks": 5,
+  "source_switch_resets_review": true,
+  "owner_report_attention_and_pass_saved": true,
+  "agent_write_denied": true,
+  "unreviewed_owner_write_denied": true,
+  "notes_escaped": true,
+  "report_download": true,
+  "jobs_executed": 0
+}

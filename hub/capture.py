@@ -94,7 +94,7 @@ def import_capture(ws, job_id, data):
         raise StudioError("Capture changed after review; scan and review a new snapshot")
     if ws.obs_password_configured():
         from hub.obs import status
-        if status()["recording"].get("outputActive"):
+        if status(ws)["recording"].get("outputActive"):
             raise StudioError("OBS is recording. Stop it before importing a finished capture")
     ws.progress(job_id, "Checking selected finished capture", 1, 3)
     original_hash = digest(path)

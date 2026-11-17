@@ -1,3 +1,7 @@
+# Prepared 0.8.0 setup path
+
+Read [rehearsal readiness](REHEARSAL_READINESS_0.8.0.md) before upgrading. On Windows, run the setup tests, then use `python -m tools.connect_obs --from-obs` for an existing enabled/authenticated server, or `--prompt --port 4455` for private entry. Open Connections → Check setup and record your personally reviewed rehearsal. DTG is offline; this upgrade and native Windows checks remain pending.
+
 # Creator control 0.7.0 additions
 
 Open **Create** for installed local narration voices and saved scene plans. Use **Platforms** for official portal links, private handoff files and upload/encoder checks. **History** shows actual jobs and repair guidance; **Review replay** always requires a fresh exact owner approval. The public kit labels Gaming, Streaming and Podcasts only. Existing setup follows.
@@ -47,7 +51,7 @@ The account plugin includes a portable local stdio configuration/runtime for a c
 python -m hub.mcp
 ```
 
-Use the running server's workspace/port. Thirteen tools inspect, save edits/projects/documents, import selected local media, run the studio command language, calculate media estimates and propose actions. Approve pending actions in Connections in the owner web UI. No agent approval tool is provided. No platform account, broadcast or publication is activated by installation.
+Use the running server's workspace/port. Twenty-three tools inspect, save edits/projects/documents, import selected local media, run the studio command language, calculate media estimates and propose actions. Approve pending actions in Connections in the owner web UI. No agent approval tool is provided. No platform account, broadcast or publication is activated by installation.
 
 ## Music, music video and shell
 

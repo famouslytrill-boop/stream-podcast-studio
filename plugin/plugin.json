@@ -4,7 +4,7 @@
     "email": "famouslytrill@gmail.com",
     "name": "damian"
   },
-  "description": "Personal gaming, streaming and podcast studio with local narration, storyboards, platform handoff drafts and reviewed workflows.",
+  "description": "Personal gaming, streaming and podcast studio with private OBS setup, rehearsal evidence and reviewed creative workflows.",
   "extensions": {
     "com.openai": {
       "interface": {
@@ -20,7 +20,7 @@
         "developerName": "damian",
         "displayName": "EmberBanter Studio",
         "logo": "./assets/emberbanter-badge.png",
-        "longDescription": "EmberBanter Studio: Music. Games. Stories. A private laptop creator hub for gaming, streaming and podcasts. Generate narration from installed Windows voices; save and render reviewed storyboards with title motion, imported visuals and optional local speech. Import finished OBS captures, prepare verified editing copies and chaptered MP4/WAV/MP3 episodes. Prepare script, message, metadata and optional calendar drafts for official platform portals. Inspect persisted history and prepare a freshly reviewed file-job replay. Measure actual bounded CPU/GPU encoder attempts. Twenty-one local MCP tools inspect, save and propose; the owner reviews exact execution in the hub. Includes the selected Gaming/Streaming/Podcasts brand kit; editing and prior music tools remain app capabilities. Laptop execution is required. Phone access needs private HTTPS. No hosted mobile bridge, source-rewriting agent, public go-live, upload, messaging or platform scheduling API is connected.",
+        "longDescription": "EmberBanter Studio: Music. Games. Stories. Gaming, streaming and podcasts with a private laptop creator hub. Prepared toolkit 0.8.0 adds private Windows-protected OBS profiles, read-only setup diagnostics, unavailable capture-folder recovery and append-only owner rehearsal reports. OBS profile changes invalidate old control approvals. Generate local narration, save scene films, finish captured episodes and prepare private platform handoff drafts. Twenty-three local MCP tools inspect, save creative plans and propose exact actions; owner-only approvals and rehearsal attestations stay in the hub. The new Windows credential path and rendered device layouts await actual device acceptance while DTG is offline; 0.7.0 is the last verified laptop installation. Phone control needs private HTTPS. This package creates no hosted mobile bridge, public go-live, upload, messaging or platform scheduling connection.",
         "shortDescription": "Gaming, streaming & podcasts"
       }
     }
@@ -39,5 +39,5 @@
     "recovery"
   ],
   "name": "emberbanter-studio",
-  "version": "0.6.0"
+  "version": "0.7.0"
 }

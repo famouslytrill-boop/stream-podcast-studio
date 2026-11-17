@@ -83,14 +83,19 @@ class Workspace:
     def __init__(self, path, *, recover=True, recordings_root=None):
         self.root = Path(path).expanduser().resolve()
         self.root.mkdir(parents=True, exist_ok=True)
-        config = self.root / "connections.json"
-        if recordings_root is None and config.exists():
-            if config.is_symlink() or config.stat().st_size > 8192:
-                raise StudioError("Invalid local studio connection settings")
-            recordings_root = json.loads(config.read_text(encoding="utf-8")).get("recordings_root")
+        from hub.connection_settings import read as connection_settings
+        config=connection_settings(self.root)
+        saved_folder=recordings_root is None
+        if recordings_root is None:
+            recordings_root=config.get("recordings_root")
+        self.recordings_issue=None
         if recordings_root is not None:
             from hub.capture import validate_root
-            recordings_root = validate_root(str(recordings_root))
+            try:recordings_root = validate_root(str(recordings_root))
+            except (StudioError,OSError):
+                if not saved_folder:raise
+                recordings_root=None
+                self.recordings_issue="The saved capture folder is unavailable. Reconnect it or configure the intended folder locally; other studio tools remain available."
         self.recordings_root = recordings_root
         self.file_lock = (self.root / ".hub-lock").open("a+b")
         try:
@@ -130,6 +135,7 @@ class Workspace:
                 CREATE TABLE IF NOT EXISTS sessions(id TEXT PRIMARY KEY, data TEXT NOT NULL);
                 CREATE TABLE IF NOT EXISTS projects(id TEXT PRIMARY KEY, data TEXT NOT NULL);
                 CREATE TABLE IF NOT EXISTS documents(id TEXT PRIMARY KEY, data TEXT NOT NULL);
+                CREATE TABLE IF NOT EXISTS rehearsals(id TEXT PRIMARY KEY, data TEXT NOT NULL);
                 CREATE TABLE IF NOT EXISTS actions(id TEXT PRIMARY KEY, data TEXT NOT NULL, state TEXT NOT NULL);
                 CREATE TABLE IF NOT EXISTS jobs(id TEXT PRIMARY KEY, data TEXT NOT NULL, state TEXT NOT NULL);
                 CREATE TABLE IF NOT EXISTS audit(id INTEGER PRIMARY KEY, at REAL NOT NULL, event TEXT NOT NULL, ref TEXT NOT NULL);
@@ -159,14 +165,16 @@ class Workspace:
         self.file_lock.close()
 
     def obs_password_configured(self):
-        return bool(os.environ.get("EMBERBANTER_OBS_PASSWORD"))
+        from hub.credentials import profile
+        try:return profile(self.root)["configured"]
+        except StudioError:return False
 
     def log(self, event, ref):
         with self.db() as db:
             db.execute("INSERT INTO audit(at,event,ref) VALUES(?,?,?)", (time.time(), event, ref))
 
     def get(self, table, key):
-        assert table in {"media", "sessions", "actions", "jobs", "projects", "documents"}
+        assert table in {"media", "sessions", "actions", "jobs", "projects", "documents", "rehearsals"}
         identifier(key)
         with self.db() as db:
             row = db.execute(f"SELECT data{',state' if table in {'actions','jobs'} else ''} FROM {table} WHERE id=?", (key,)).fetchone()
@@ -178,7 +186,7 @@ class Workspace:
         return result
 
     def listing(self, table):
-        assert table in {"media", "sessions", "jobs", "actions", "projects", "documents"}
+        assert table in {"media", "sessions", "jobs", "actions", "projects", "documents", "rehearsals"}
         with self.db() as db:
             rows = db.execute(f"SELECT id FROM {table} ORDER BY rowid DESC LIMIT 100").fetchall()
         return [self.get(table, r[0]) for r in rows]
@@ -288,7 +296,11 @@ class Workspace:
             params, summary = prepare(self, kind, params)
         elif kind == "obs":
             from hub.obs import validate_action
+            from hub.credentials import profile
             params = validate_action(params)
+            connection=profile(self.root)
+            if not connection["configured"]:raise StudioError("Connect OBS privately on this laptop before proposing a control")
+            params["connection_revision"]=connection["revision"]
             summaries = {"record_start": "Start recording the configured OBS picture and audio on this laptop.",
                          "record_stop": "Stop the current OBS recording and save it using OBS settings.",
                          "record_pause": "Pause the current OBS recording.", "record_resume": "Resume the current OBS recording.",
@@ -340,6 +352,10 @@ class Workspace:
                 from hub.projects import read_document
                 if read_document(self, action["params"]["document_id"])["revision"] != action["params"]["revision"]:
                     raise StudioError("Storyboard changed after the proposal. Review a new render")
+            if action["kind"] == "obs":
+                from hub.credentials import revision
+                if action["params"].get("connection_revision")!=revision(self.root):
+                    raise StudioError("OBS connection changed after review. Review a new action")
             count = db.execute("SELECT count(*) FROM jobs WHERE state IN ('queued','running')").fetchone()[0]
             if count >= 4:
                 raise StudioError("Four jobs are already waiting. Let them finish first")
@@ -369,7 +385,7 @@ class Workspace:
                 result = execute(self, job_id, action["kind"], action["params"])
             else:
                 from hub.obs import perform
-                result = perform(action["params"])
+                result = perform(action["params"],self)
             job.update(result=result, finished=time.time())
             state = "completed"
         except Exception as error:
