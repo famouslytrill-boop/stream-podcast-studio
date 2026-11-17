@@ -250,13 +250,39 @@ class HTTPTests(HubFixture):
     def test_mcp_discovery_and_harmless_real_call(self):
         client = Client(self.ws.root, self.server.server_port)
         initialized = dispatch({"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18"}}, client)
-        self.assertEqual(initialized["result"]["serverInfo"]["version"], "0.4.0")
+        from hub import VERSION
+        self.assertEqual(initialized["result"]["serverInfo"]["version"], VERSION)
         result = dispatch({"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"studio_status","arguments":{}}}, client)
         self.assertFalse(result["result"]["isError"])
         self.assertNotIn("approve", " ".join(t["name"] for t in TOOLS))
         self.assertNotIn(self.ws.pairing_key, json.dumps(result))
         with self.assertRaises(ValueError):
             client.call("studio_approve", {})
+
+    def test_connected_project_document_shell_and_import_tools(self):
+        client = Client(self.ws.root, self.server.server_port)
+        project = client.call("studio_project_save", {"project":{"title":"API song","kind":"music"}})
+        self.assertEqual(project["kind"], "music")
+        note = client.call("studio_document_write", {"document":{"title":"Lyrics","content":"A line\n","project_id":project["id"]}})
+        self.assertEqual(client.call("studio_document_read", {"id":note["id"]})["content"], "A line\n")
+        self.assertEqual(client.call("studio_shell", {"command":"status"})["counts"]["projects"], 1)
+        imported = client.call("studio_import", {"file":str(self.source)})
+        self.assertEqual(imported["sha256"], self.item["sha256"])
+        self.assertEqual(len(client.call("studio_workflows", {})["workflows"]), 4)
+
+    def test_brand_kit_and_suite_assets_are_real(self):
+        import io,zipfile
+        auth = self.pair()
+        for route in ("/suite.js", "/suite.css", "/brand/kit.json", "/brand/starting.jpg"):
+            status, _, raw = self.request("GET", route, headers=auth)
+            self.assertEqual(status, 200, route)
+            self.assertGreater(len(raw), 10)
+        status, _, raw = self.request("GET", "/api/brand-kit", headers=auth)
+        self.assertEqual(status, 200)
+        with zipfile.ZipFile(io.BytesIO(raw)) as archive:
+            self.assertIsNone(archive.testzip())
+            self.assertIn("starting.jpg", archive.namelist())
+            self.assertIn("clip-frame.png", archive.namelist())
 
 
 if __name__ == "__main__":
