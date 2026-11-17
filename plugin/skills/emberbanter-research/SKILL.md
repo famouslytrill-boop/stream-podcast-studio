@@ -15,3 +15,5 @@ Deliver a concise brief: episode angle, 3-5 supported facts, what remains disput
 
 For unsupported account analytics, discover appropriate connectors before requesting pasted material. Do not add paid integrations, tracking, credentials or public posts as part of research alone.
 
+
+Read [creative control](../../references/creative-control.md) for current implemented engines, repair/replay rules and service boundaries. Use [brand and market research](../../references/brand-market-2026-11-17.md) for primary sources, exact identity and evidence-based audience experiments. Recheck time-sensitive provider rules. Do not infer an account connection from plugin discovery or a package release.

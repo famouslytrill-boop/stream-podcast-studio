@@ -1,0 +1,33 @@
+{
+  "method": "WCAG relative luminance ratio; exact solid sRGB colors; no image/background contrast claim",
+  "pairs": [
+    {
+      "pair": "Bone on charcoal",
+      "foreground": "#F4F1E8",
+      "background": "#101216",
+      "ratio": 16.6,
+      "normal_text_AA": true
+    },
+    {
+      "pair": "Mint on charcoal",
+      "foreground": "#8EF2CE",
+      "background": "#101216",
+      "ratio": 14.05,
+      "normal_text_AA": true
+    },
+    {
+      "pair": "Charcoal on ember",
+      "foreground": "#101216",
+      "background": "#FF6A3D",
+      "ratio": 6.59,
+      "normal_text_AA": true
+    },
+    {
+      "pair": "Bone on ember",
+      "foreground": "#F4F1E8",
+      "background": "#FF6A3D",
+      "ratio": 2.52,
+      "normal_text_AA": false
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 
 EmberBanter is the chosen name. Music. Games. Stories. Community tagline: Clock out. Queue up.
 
-This kit presents gaming, streaming, podcasts and video/audio editing. Use the current identity board and episode graphics across the brand.
+This kit presents gaming, streaming and podcasts. Use the current identity board and episode graphics across the brand.
 
 Use the existing badge. Keep clear space around it; test the name at phone size. Orange buttons use dark text. Bone copy on charcoal is the default; mint highlights stay restrained.
 

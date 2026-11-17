@@ -1,3 +1,7 @@
+# Creator control 0.7.0 additions
+
+Open **Create** for installed local narration voices and saved scene plans. Use **Platforms** for official portal links, private handoff files and upload/encoder checks. **History** shows actual jobs and repair guidance; **Review replay** always requires a fresh exact owner approval. The public kit labels Gaming, Streaming and Podcasts only. Existing setup follows.
+
 # Open the personal studio
 
 On DTG, use **Creator Hub** inside the existing **EmberBanter Studio** desktop folder. It starts the local service if necessary and privately pairs the laptop browser. It does not record or stream automatically. Keep the laptop awake while processing.

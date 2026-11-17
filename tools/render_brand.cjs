@@ -8,11 +8,11 @@ async function main(){
   if(process.argv[3])await sharp(process.argv[3]).resize({width:1536,withoutEnlargement:true}).jpeg({quality:92}).toFile(path.join(root,'identity-board.jpg'));
   const badge=(await fs.readFile(path.join(root,'badge.png'))).toString('base64');
   const room=(await fs.readFile(path.join(root,'room.jpg'))).toString('base64');
-  for(const name of ['starting','brb','ending','podcast-cover','clip-frame','lower-third','channel-banner','thumbnail-template']){
+  for(const name of ['starting','brb','ending','podcast-cover','clip-frame','lower-third','channel-banner','thumbnail-template','wordmark','avatar']){
     let source=await fs.readFile(path.join(root,name+'.svg'),'utf8');
     source=source.replaceAll('href="badge.png"','href="data:image/png;base64,'+badge+'"').replaceAll('href="room.jpg"','href="data:image/jpeg;base64,'+room+'"');
     const renderer=sharp(Buffer.from(source));
-    if(['podcast-cover','clip-frame','lower-third'].includes(name))await renderer.png().toFile(path.join(root,name+'.png'));
+    if(['podcast-cover','clip-frame','lower-third','wordmark','avatar'].includes(name))await renderer.png().toFile(path.join(root,name+'.png'));
     else await renderer.jpeg({quality:90}).toFile(path.join(root,name+'.jpg'));
   }
 }

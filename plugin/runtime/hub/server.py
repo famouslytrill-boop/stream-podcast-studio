@@ -163,6 +163,8 @@ class Handler(BaseHTTPRequestHandler):
                                      "publishing_connected": False, "go_live_available": False})
                 elif path == "/api/session":
                     self.reply(200, ws.get("sessions", query.get("id", [""])[0]))
+                elif path == "/api/job":
+                    self.reply(200, ws.get("jobs", query.get("id", [""])[0]))
                 elif path == "/api/document":
                     self.reply(200, read_document(ws, query.get("id", [""])[0]))
                 elif path == "/api/brand-kit":
@@ -173,6 +175,21 @@ class Handler(BaseHTTPRequestHandler):
                 elif path == "/api/recordings":
                     from hub.capture import scan
                     self.reply(200, scan(ws))
+                elif path == "/api/voices":
+                    from hub.speech import voices
+                    self.reply(200, {"voices":voices(),"remote_fallback":False})
+                elif path == "/api/storyboard":
+                    from hub.storyboard import read
+                    self.reply(200, read(ws,query.get("id",[""])[0]))
+                elif path == "/api/history":
+                    from hub.recovery import history
+                    self.reply(200, history(ws,int(query.get("offset",["0"])[0])))
+                elif path == "/api/platforms":
+                    from hub.distribution import catalog
+                    self.reply(200, catalog())
+                elif path == "/api/hardware":
+                    from hub.performance import hardware
+                    self.reply(200, hardware())
                 elif path == "/api/obs":
                     from hub.obs import status
                     self.reply(200, status())
@@ -196,7 +213,7 @@ class Handler(BaseHTTPRequestHandler):
                 else:
                     self.reply(404, {"error": "Unknown studio route"})
                 return
-            names = {"/": "index.html", "/index.html": "index.html", "/app.js": "app.js", "/suite.js": "suite.js", "/style.css": "style.css", "/suite.css": "suite.css", "/broadcast.js": "broadcast.js", "/broadcast.css": "broadcast.css",
+            names = {"/": "index.html", "/index.html": "index.html", "/app.js": "app.js", "/suite.js": "suite.js", "/style.css": "style.css", "/suite.css": "suite.css", "/broadcast.js": "broadcast.js", "/broadcast.css": "broadcast.css", "/control.js":"control.js", "/control.css":"control.css",
                      "/manifest.webmanifest": "manifest.webmanifest", "/sw.js": "sw.js", "/icon.svg": "icon.svg",
                      "/brand-kits.json": "brand-kits.json", "/icon-192.png": "icon-192.png", "/icon-512.png": "icon-512.png"}
             brand_root = WEB / "brand"
@@ -306,6 +323,15 @@ class Handler(BaseHTTPRequestHandler):
                 self.reply(200, save_project(ws, data))
             elif path == "/api/documents":
                 self.reply(200, save_document(ws, data))
+            elif path == "/api/storyboards":
+                from hub.storyboard import save
+                self.reply(200, save(ws, data))
+            elif path == "/api/replay":
+                from hub.recovery import replay
+                self.reply(201, replay(ws,data.get("id")))
+            elif path == "/api/performance-plan":
+                from hub.performance import plan
+                self.reply(200, plan(data))
             elif path == "/api/shell":
                 from hub.shell import run
                 self.reply(200, run(ws, data.get("command")))

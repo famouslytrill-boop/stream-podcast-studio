@@ -2,13 +2,13 @@
   "focus": [
     "Gaming",
     "Streaming",
-    "Podcasts",
-    "Video + audio editing"
+    "Podcasts"
   ],
   "brand": "EmberBanter Studio",
   "chosen_by_owner": "2026-11-17",
   "descriptor": "Music. Games. Stories.",
   "tagline": "Clock out. Queue up.",
+  "welcome_line": "Pull up a chair.",
   "palette": {
     "charcoal": "#101216",
     "surface": "#191D22",

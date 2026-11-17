@@ -1,0 +1,46 @@
+{
+  "schema": "emberbanter.role-contracts.v1",
+  "mode": "deterministic stages; no always-on model agents",
+  "roles": [
+    {
+      "id": "researcher",
+      "authority": "source-linked draft only",
+      "runtime": "assistant guidance; external search requires actual tools"
+    },
+    {
+      "id": "planner",
+      "authority": "validated exact plan; cannot execute or approve",
+      "runtime": "hub workflow prepare functions"
+    },
+    {
+      "id": "director",
+      "authority": "save versioned scenes and request review",
+      "runtime": "storyboard plan API"
+    },
+    {
+      "id": "worker",
+      "authority": "one reviewed bounded local job",
+      "runtime": "single ThreadPoolExecutor"
+    },
+    {
+      "id": "verifier",
+      "authority": "reject mismatched hashes, timing, dimensions and decode failures",
+      "runtime": "FFmpeg/ffprobe + provenance checks"
+    },
+    {
+      "id": "recovery",
+      "authority": "guidance and fresh file-job proposal only",
+      "runtime": "persisted history/replay; no external side-effect retry"
+    },
+    {
+      "id": "distribution",
+      "authority": "private handoff drafts only",
+      "runtime": "local files; zero provider calls"
+    },
+    {
+      "id": "owner",
+      "authority": "exact one-use approval, account sign-in and final publication",
+      "runtime": "owner hub UI / official platform portal"
+    }
+  ]
+}

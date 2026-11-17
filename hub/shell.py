@@ -19,6 +19,10 @@ new <title>                  Write a new empty studio text file
 read <document-id>            Read the current file revision
 write <id> <revision> <text>  Write a new revision; preserve the old file
 workflows                    List deterministic recipes
+history                      Show persisted jobs and repair guidance
+replay <job-id>              Prepare a fresh review of an eligible file job
+voices                       List actually installed local narration voices
+platforms                    List official manual handoff destinations
 check                        Prepare local engineering checks
 run <recipe> <json>           Prepare an exact reviewed workflow
 No command starts a public stream, publishes, installs packages or runs arbitrary OS code."""
@@ -35,6 +39,18 @@ def run(ws, command):
     if verb == "recordings":
         from hub.capture import scan
         return scan(ws)
+    if verb == "voices":
+        from hub.speech import voices
+        return {"voices":voices()}
+    if verb == "platforms":
+        from hub.distribution import catalog
+        return catalog()
+    if verb == "history":
+        from hub.recovery import history
+        return history(ws)
+    if verb == "replay":
+        from hub.recovery import replay
+        return {"proposal":replay(ws,rest.strip())}
     if verb == "apps":
         return {"apps": inventory()}
     if verb == "projects":

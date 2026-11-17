@@ -1,6 +1,8 @@
 # EmberBanter current state
 
-Latest: **v0.6.0 broadcast workflows** — [current capture/episode contracts and evidence](hub/BROADCAST_0.6.0.md). Brand focus: Gaming, Streaming, Podcasts, Video + Audio Editing; descriptor stays Music. Games. Stories. Audacity portable is now installed/running. Earlier notes below are historical.
+Latest source: **v0.7.0 creator control**, plugin source **v0.6.0**. [Current contracts](hub/CREATOR_CONTROL_0.7.0.md), [brand/market research](hub/BRAND_AND_MARKET_2026-11-17.md). Local narration, saved scene films, platform draft packs, history and measured encoder probes extend the existing capture/episode suite. Device and release acceptance are recorded separately after execution. Branding now presents only Gaming, Streaming, Podcasts; Music. Games. Stories. is preserved.
+
+Previous: **v0.6.0 broadcast workflows** — [current capture/episode contracts and evidence](hub/BROADCAST_0.6.0.md). Historical brand focus included editing; the 0.7.0 public kit is Gaming, Streaming, Podcasts; descriptor stays Music. Games. Stories. Audacity portable is now installed/running. Earlier notes below are historical.
 
 Latest: **v0.5.0 creative suite**, November 17, 2026. Chosen identity EmberBanter Studio; real stem mixing, MIDI, music video/chroma key, versioned notes, scoped shell, deterministic jobs and brand masters. [Current milestone and remaining integrations](hub/CREATIVE_SUITE_2026-11-17.md). Historical device/tool records below are not a fresh heartbeat.
 

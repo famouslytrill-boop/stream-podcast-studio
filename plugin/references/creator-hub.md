@@ -1,3 +1,7 @@
+# Current extension: creator control 0.7.0 / plugin 0.6.0
+
+Read [creative control](creative-control.md). The earlier hub architecture below remains applicable except where extended.
+
 # Open the personal studio
 
 On DTG, use **Creator Hub** inside the existing **EmberBanter Studio** desktop folder. It starts the local service if necessary and privately pairs the laptop browser. It does not record or stream automatically. Keep the laptop awake while processing.
@@ -43,7 +47,7 @@ The account plugin includes a portable local stdio configuration/runtime for a c
 python -m hub.mcp
 ```
 
-Use the running server's workspace/port. Thirteen tools inspect, save edits/projects/documents, import selected local media, run the studio command language, calculate media estimates and propose actions. Approve pending actions in Connections in the owner web UI. No agent approval tool is provided. No platform account, broadcast or publication is activated by installation.
+Use the running server's workspace/port. Twenty-one tools inspect, save edits/projects/documents, import selected local media, run the studio command language, calculate media estimates and propose actions. Approve pending actions in Connections in the owner web UI. No agent approval tool is provided. No platform account, broadcast or publication is activated by installation.
 
 ## Music, music video and shell
 

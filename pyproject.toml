@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "emberbanter-local-studio"
-version = "0.6.0"
+version = "0.7.0"
 description = "Private local creator hub, recording controls and verified media exports"
 requires-python = ">=3.11"
 dependencies = []
@@ -22,4 +22,4 @@ emberbanter-mcp = "hub.mcp:main"
 include = ["tools", "hub"]
 
 [tool.setuptools.package-data]
-hub = ["web/*", "web/brand/*"]
+hub = ["*.ps1", "web/*", "web/brand/*"]

@@ -1,3 +1,5 @@
+Current brand supersession: the 0.7.0 kit now labels Gaming, Streaming and Podcasts only. Editing remains an application feature. See [creative control](creative-control.md).
+
 # EmberBanter broadcast workflows — v0.6.0
 
 November 17, 2026, America/New_York. Account plugin source v0.5.0.

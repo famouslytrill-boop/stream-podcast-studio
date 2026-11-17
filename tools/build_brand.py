@@ -23,7 +23,9 @@ def build():
     svg("lower-third",1920,1080,'<rect x="80" y="820" width="900" height="160" rx="12" fill="#101216" fill-opacity="0.92"/><rect x="80" y="820" width="8" height="160" fill="#FF6A3D"/><image href="badge.png" x="105" y="835" width="130" height="130"/><text x="260" y="890" fill="#F4F1E8" font-size="46" font-weight="700">DAM</text><text x="260" y="944" fill="#8EF2CE" font-size="32">EMBERBANTER STUDIO</text>')
     svg("channel-banner",2560,1440,'<rect width="2560" height="1440" fill="#101216"/><rect x="0" y="0" width="2560" height="12" fill="#FF6A3D"/><image href="badge.png" x="490" y="530" width="330" height="330"/><text x="870" y="690" fill="#F4F1E8" font-size="115" font-weight="800">EmberBanter</text><text x="875" y="780" fill="#8EF2CE" font-size="48">Music. Games. Stories.</text><text x="875" y="855" fill="#F4F1E8" font-size="34">Clock out. Queue up.</text>')
     svg("thumbnail-template",1280,720,'<image href="room.jpg" width="1280" height="720"/><image href="badge.png" x="55" y="45" width="130" height="130"/><text x="65" y="330" fill="#F4F1E8" font-size="86" font-weight="800">TONIGHT’S</text><text x="65" y="435" fill="#F4F1E8" font-size="86" font-weight="800">CHALLENGE</text><rect x="65" y="480" width="430" height="12" fill="#FF6A3D"/>')
-    config={"focus":["Gaming","Streaming","Podcasts","Video + audio editing"],"brand":"EmberBanter Studio","chosen_by_owner":"2026-11-17","descriptor":"Music. Games. Stories.","tagline":"Clock out. Queue up.",
+    svg("wordmark",1600,400,'<rect width="1600" height="400" rx="24" fill="#101216"/><image href="badge.png" x="45" y="40" width="310" height="310"/><text x="395" y="177" fill="#F4F1E8" font-size="104" font-weight="800">EmberBanter</text><text x="402" y="254" fill="#8EF2CE" font-size="42" letter-spacing="7">MUSIC. GAMES. STORIES.</text>')
+    svg("avatar",800,800,'<rect width="800" height="800" rx="160" fill="#101216"/><image href="badge.png" x="70" y="70" width="660" height="660"/>')
+    config={"focus":["Gaming","Streaming","Podcasts"],"brand":"EmberBanter Studio","chosen_by_owner":"2026-11-17","descriptor":"Music. Games. Stories.","tagline":"Clock out. Queue up.","welcome_line":"Pull up a chair.",
             "palette":{"charcoal":"#101216","surface":"#191D22","ember":"#FF6A3D","mint":"#8EF2CE","bone":"#F4F1E8"},
             "fonts":{"headings":"DejaVu Sans bold / system sans fallback","body":"Segoe UI, system-ui, sans-serif","timecode":"ui-monospace, monospace"},
             "masters":{"scenes":[1920,1080],"podcast":[3000,3000],"vertical":[1080,1920],"banner":[2560,1440],"thumbnail":[1280,720]},
@@ -33,7 +35,7 @@ def build():
 
 EmberBanter is the chosen name. Music. Games. Stories. Community tagline: Clock out. Queue up.
 
-This kit presents gaming, streaming, podcasts and video/audio editing. Use the current identity board and episode graphics across the brand.
+This kit presents gaming, streaming and podcasts. Use the current identity board and episode graphics across the brand.
 
 Use the existing badge. Keep clear space around it; test the name at phone size. Orange buttons use dark text. Bone copy on charcoal is the default; mint highlights stay restrained.
 

@@ -9,6 +9,10 @@ from hub.core import digest
 from tools.studio_tools import StudioError, doctor
 
 RECIPES = [
+    {"id": "narration", "name": "Make local narration", "steps": ["Validate installed voice and reviewed text", "Synthesize a private WAV", "Measure MP3 and decode both files"]},
+    {"id": "storyboard", "name": "Render a storyboard film", "steps": ["Pin reviewed scenes and visual sources", "Measure optional local narration", "Render integer-frame scenes", "Decode and package"]},
+    {"id": "delivery_pack", "name": "Prepare a platform handoff", "steps": ["Pin selected platforms and reviewed topic", "Write metadata and script drafts", "Write optional calendar import", "Package private files"]},
+    {"id": "performance", "name": "Check actual encoders", "steps": ["Confirm no live production", "Run bounded synthetic CPU and optional GPU encodes", "Decode outputs and save measured evidence"]},
     {"id": "capture_import", "name": "Import a finished OBS capture", "steps": ["Select a finished file snapshot", "Copy and verify source stability", "Register protected media and receipt"]},
     {"id": "edit_copy", "name": "Prepare an editing copy", "steps": ["Verify source and codec compatibility", "Remux without re-encoding", "Compare compressed streams", "Decode and package"]},
     {"id": "episode", "name": "Finish a podcast or video episode", "steps": ["Verify source recordings", "Arrange reviewed segments", "Finish audio", "Build chapters and companion files", "Decode and package"]},
@@ -20,6 +24,22 @@ RECIPES = [
 
 
 def prepare(ws, kind, data):
+    if kind == "narration":
+        from hub.speech import prepare as speech_prepare
+        clean = speech_prepare(data)
+        return clean, f"Generate private narration using installed {clean['voice_name']}, rate {clean['rate']}. {len(clean['text'])} text characters; local speech only, no cloned voice."
+    if kind == "storyboard":
+        from hub.storyboard import prepare as board_prepare
+        clean = board_prepare(ws, data)
+        return clean, f"Render {len(clean['scenes'])} reviewed {clean['format']} scenes with {'local narration' if clean['voice_id'] else 'silent audio'}. Timing is verified after rendering; no external generation or publication."
+    if kind == "delivery_pack":
+        from hub.distribution import prepare as delivery_prepare
+        clean = delivery_prepare(data)
+        return clean, f"Create private script, message and metadata drafts for {len(clean['platforms'])} platform(s). Calendar import: {'included' if clean['start_at'] else 'not requested'}. No upload, message sending or automatic scheduling."
+    if kind == "performance":
+        from hub.performance import prepare as performance_prepare
+        clean = performance_prepare(data)
+        return clean, "Run three-second synthetic 720p30 CPU encoding and an optional AMD GPU attempt. Uses local compute; does not change OBS settings or establish sustained streaming performance."
     if kind == "capture_import":
         from hub.capture import prepare as capture_prepare
         clean = capture_prepare(ws,data)
@@ -85,6 +105,18 @@ def engineering(ws, job_id):
 
 
 def execute(ws, job_id, kind, data):
+    if kind == "narration":
+        from hub.speech import render
+        return render(ws, job_id, data)
+    if kind == "storyboard":
+        from hub.storyboard import render
+        return render(ws, job_id, data)
+    if kind == "delivery_pack":
+        from hub.distribution import render
+        return render(ws, job_id, data)
+    if kind == "performance":
+        from hub.performance import benchmark
+        return benchmark(ws, job_id, data)
     if kind == "capture_import":
         from hub.capture import import_capture
         return import_capture(ws,job_id,data)
