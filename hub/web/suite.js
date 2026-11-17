@@ -82,7 +82,7 @@ export function createSuite(ctx) {
     action('#shell-form',async ev=>{ev.preventDefault();const input=$('#shell-command'),button=$('#shell-run');shellCommand=input.value;shellHistory.push(shellCommand);historyIndex=shellHistory.length;button.disabled=true;shellLines.push('> '+shellCommand);try{const result=await ctx.api('/api/shell',{command:shellCommand});shellLines.push(formatShell(result));shellLines=shellLines.slice(-80);await ctx.refresh();if(result.proposal)await ctx.showApproval(result.proposal);else ctx.render();}catch(err){shellLines.push('Error: '+err.message);$('#shell-output').textContent=shellLines.join('\n');throw err;}finally{if($('#shell-run'))$('#shell-run').disabled=false;}},'submit');
     action('#shell-command',ev=>{if(ev.key==='ArrowUp'||ev.key==='ArrowDown'){ev.preventDefault();historyIndex=Math.max(0,Math.min(shellHistory.length,historyIndex+(ev.key==='ArrowUp'?-1:1)));ev.target.value=shellHistory[historyIndex]||'';}},'keydown');
     action('#music-import',()=>ctx.importFor('music'));action('#video-import',()=>ctx.importFor('music_video'));
-    action('#add-stem',()=>{captureMix();if(mix.tracks.length>=8)throw Error('Use up to eight stems.');const m=audio()[0];if(!m)throw Error('Import an audio stem first.');mix.tracks.push({media_id:m.id,gain_db:0,pan:0,start:0,end:m.duration,offset:0});ctx.render();});
+    action('#add-stem',()=>{captureMix();if(mix.tracks.length>=8)throw Error('Use up to eight stems.');const m=audio()[0];if(!m)throw Error('Import an audio stem first.');mix.rights_reviewed=false;mix.tracks.push({media_id:m.id,gain_db:0,pan:0,start:0,end:m.duration,offset:0});ctx.render();});
     document.querySelectorAll('[data-remove-stem]').forEach(b=>b.onclick=()=>{captureMix();mix.tracks.splice(Number(b.dataset.removeStem),1);mix.rights_reviewed=false;ctx.render();});
     document.querySelectorAll('select[data-track]').forEach(el=>el.onchange=()=>{captureMix();const track=mix.tracks[Number(el.dataset.track)],m=audio().find(m=>m.id===el.value);if(m){track.start=0;track.end=m.duration;}mix.rights_reviewed=false;ctx.render();});
     action('#review-mix',async()=>{captureMix();await ctx.propose('music_mix',mix);});
@@ -90,7 +90,8 @@ export function createSuite(ctx) {
     action('#review-midi',()=>ctx.propose('midi',{title:$('#midi-title').value,bpm:Number($('#midi-bpm').value),bars:Number($('#midi-bars').value),key:$('#midi-key').value}));
     action('#review-movie',()=>{captureMovie();return ctx.propose('music_video',movie);});
     action('#movie-visual',()=>{captureMovie();movie.rights_reviewed=false;ctx.render();},'change');
-    action('#movie-audio',()=>{captureMovie();const m=audio().find(m=>m.id===movie.audio_id);if(m)movie.end=Math.min(600,m.duration);ctx.render();},'change');
+    action('#movie-audio',()=>{captureMovie();const m=audio().find(m=>m.id===movie.audio_id);if(m)movie.end=Math.min(600,m.duration);movie.rights_reviewed=false;ctx.render();},'change');
+    action('#movie-foreground',()=>{captureMovie();movie.rights_reviewed=false;ctx.render();},'change');
     document.querySelectorAll('[data-recipe]').forEach(b=>b.onclick=()=>{if(b.dataset.recipe==='engineering')ctx.propose('engineering',{}).catch(err=>ctx.notice(err.message,true));else ctx.navigate(b.dataset.recipe==='music_video'?'music_video':'music');});
     document.querySelectorAll('[data-document]').forEach(b=>b.onclick=async()=>{try{noteDocument=await ctx.api('/api/document?id='+b.dataset.document);ctx.render();}catch(err){ctx.notice(err.message,true);}});
     action('#new-document',()=>{noteDocument=null;ctx.render();});

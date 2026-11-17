@@ -1,3 +1,11 @@
+# Creative suite verification — November 17, 2026
+
+Toolkit v0.5.0; account plugin source v0.4.0. Linux **55/55** tests and DTG Windows **55/55** tests passed. Actual Chrome UI produced a two-stem mix, MIDI sketch, music video and engineering report through exact owner-review screens, created projects and a real document revision, and downloaded the 3,422,773-byte brand kit. No page exceptions or horizontal overflow across eight checked phone views. Synthetic media only; no physical mic/Xbox, OBS mutation or publication. See [full evidence and visual fidelity](CREATIVE_SUITE_2026-11-17.md#algorithms-and-measured-evidence).
+
+The retained v0.4 record below describes the prior milestone; statements about absent music/chroma-key features are superseded by v0.5.
+
+---
+
 # Creator hub verification
 
 Scope: toolkit v0.4.0, account plugin source v0.3.0. Evidence collected on DTG and the Linux build executor. Synthetic fixtures were used throughout; no owner microphone/Xbox recording or OBS mutation was performed.

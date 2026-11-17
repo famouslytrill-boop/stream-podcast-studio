@@ -1,6 +1,6 @@
 ---
 name: emberbanter-studio
-description: "Use for EmberBanter streaming or podcast work, mobile studio check-ins, production priorities, or choosing the next practical step."
+description: "Use for EmberBanter music, music-video, gaming, streaming or podcast work, mobile studio check-ins, production priorities, or choosing the next practical step."
 ---
 
 # EmberBanter Studio
@@ -19,3 +19,5 @@ Brand files: [existing scene kit](../../assets/brand/START_HERE.txt). Research a
 
 
 For the personal recording/editing control hub, use [creator hub](../emberbanter-creator-hub/SKILL.md). Legacy studio_tools.py remains read-only for OBS; the separate hub supports reviewed recording/scene/mixer writes. Local stdio tools and paired-phone PWA access require actual runtime connections.
+
+The owner-selected identity is EmberBanter across the entire hub. For music, music-video, projects, lyrics/scripts/notes, command shell, deterministic automation and downloadable brand assets, route to [creator hub](../emberbanter-creator-hub/SKILL.md) and its creative-suite contracts.

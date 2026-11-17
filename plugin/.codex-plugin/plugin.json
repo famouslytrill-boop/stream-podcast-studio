@@ -3,7 +3,7 @@
     "email": "famouslytrill@gmail.com",
     "name": "damian"
   },
-  "description": "Private creator studio workflows with a local recording, editing and export hub for laptop and paired phone use.",
+  "description": "Personal music, gaming, streaming, podcast and music-video studio with a local dashboard, scoped shell and deterministic production workflows.",
   "interface": {
     "brandColor": "#FF6A3D",
     "capabilities": [],
@@ -17,17 +17,20 @@
     "developerName": "damian",
     "displayName": "EmberBanter Studio",
     "logo": "./assets/emberbanter-badge.png",
-    "longDescription": "Plan streams and podcasts, inspect local software, prepare clips and revenue scenarios, and use the bundled creator hub to import recordings, arrange cuts, add corrected captions, render video or podcast files, and review local OBS recording, scene and mixer actions. A local MCP adapter can inspect the hub, save edit sessions and propose actions; the owner approves execution in the hub. Laptop execution is required. Phone web controls need a private HTTPS connection; ChatGPT mobile does not run local stdio tools. No hosted bridge, go-live or publishing integration is claimed.",
-    "shortDescription": "Streaming & podcast production"
+    "longDescription": "Create music, gaming, streaming, podcast and music-video projects in a private local dashboard. Mix stems, create MIDI sketches, render artwork/footage music videos with waveform and chroma key, arrange cuts, correct captions, write versioned lyrics/scripts/notes, discover installed editors, and review fixed production or diagnostic workflows. Twelve local MCP tools inspect, save and propose; exact execution is reviewed in the owner hub. Includes the selected EmberBanter brand kit. Laptop execution is required. Phone control needs private HTTPS pairing; ChatGPT mobile cannot execute this local stdio package. No hosted bridge, autonomous source rewriting, full DAW control, public go-live or publishing integration is claimed.",
+    "shortDescription": "Music, games & production"
   },
   "keywords": [
+    "music",
+    "music-video",
     "streaming",
     "podcast",
     "gaming",
     "obs",
+    "automation",
     "emberbanter"
   ],
   "name": "emberbanter-studio",
   "skills": "./skills",
-  "version": "0.3.0"
+  "version": "0.4.0"
 }

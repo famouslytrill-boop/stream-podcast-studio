@@ -43,4 +43,8 @@ The account plugin includes a portable local stdio configuration/runtime for a c
 python -m hub.mcp
 ```
 
-Use the running server's workspace/port. Six tools inspect, save edits, calculate media estimates and propose actions. Approve pending actions in Connections in the owner web UI. No agent approval tool is provided. No platform account, broadcast or publication is activated by installation.
+Use the running server's workspace/port. Twelve tools inspect, save edits/projects/documents, import selected local media, run the studio command language, calculate media estimates and propose actions. Approve pending actions in Connections in the owner web UI. No agent approval tool is provided. No platform account, broadcast or publication is activated by installation.
+
+## Music, music video and shell
+
+Use Dashboard to create a Music, Music video, Gaming, Streaming or Podcast project. Music imports stems and exports a reviewed WAV/MP3 mix or a MIDI sketch. Music video pairs a chosen song with artwork/footage and optional waveform/chroma key. Library writes versioned lyrics/scripts/notes. Dashboard shell `help` lists its actual scoped commands; `apps` lists detected editors. Automation reviews a fixed workflow or studio checks. Brand kit downloads the selected EmberBanter masters. Read [creative-suite details](CREATIVE_SUITE_2026-11-17.md).

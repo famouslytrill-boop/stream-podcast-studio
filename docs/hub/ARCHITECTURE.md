@@ -1,6 +1,6 @@
-# Personal creator hub — v0.4.0
+# Personal creator hub — v0.5.0
 
-Prepared November 16, 2026, America/New_York. Working identity: EmberBanter Studio. The account plugin is a separate release, v0.3.0.
+Updated November 17, 2026, America/New_York. Selected identity: EmberBanter Studio. Account plugin is a separate release, v0.4.0. See [creative suite](CREATIVE_SUITE_2026-11-17.md) for the new music, video, shell, automation and branding contracts.
 
 The laptop owns capture and media computation. A phone is a responsive remote control paired over an explicitly configured private HTTPS origin. Local MCP access is a separate connection from the phone web app. Loading a skill does not create a device bridge.
 
@@ -24,8 +24,8 @@ The frontend uses framework-free ES modules/CSS and the existing Python runtime.
 | --- | --- |
 | Service | Binds only to 127.0.0.1; validates Host and Origin. Optional explicit HTTPS proxy hostname creates no tunnel. |
 | Pairing | Private random key, HttpOnly/SameSite Strict 12-hour cookies, Secure on configured HTTPS, CSRF-protected writes, limited pairing attempts. |
-| Agent | Six local stdio tools: status, library, session save, proposal, job status, media arithmetic. No approval tool. API denies bearer approval/key retrieval. This does not isolate arbitrary programs already running as the OS user. |
-| Imports | ID-scoped protected copies, SHA-256 provenance, 2 GiB upload cap and 12-hour duration cap. No browser-supplied filesystem paths or FFmpeg filter strings. |
+| Agent | Twelve local stdio tools: previous six plus shell, projects, document read/write, workflow discovery and selected-local-file import. No approval tool. API denies bearer approval/key retrieval. This does not isolate arbitrary programs already running as the OS user. |
+| Imports | ID-scoped protected copies, SHA-256 provenance, 2 GiB upload cap and 12-hour duration cap. Artwork PNG/JPEG/WebP is limited to 20 MB/8192px and decoded before import. No browser-supplied filesystem paths or FFmpeg filter strings. |
 | Edits | SQLite revision checks; up to 12 cuts and three-hour output. One source and one explicitly chosen audio track. Corrected source-timeline SRT is rebased after editing. |
 | Approval | Immutable action ID/hash, three-minute expiry and one use. Changed session revisions invalidate pending export approval. |
 | Jobs | One worker, at most four queued/running jobs, fresh output directory. Restart interrupts incomplete jobs and expires pending actions; no replay. OS workspace lock prevents another service recovering active work. |
@@ -33,6 +33,8 @@ The frontend uses framework-free ES modules/CSS and the existing Python runtime.
 | Recovery | Failed microphone import retains a browser-downloadable take and retry. Closing before saving/importing can lose that temporary take. |
 | Offline | Only the application shell is cached. No media, keys, API replies or approvals. Offline mode cannot dispatch laptop jobs. |
 | Publishing | No account tokens, public upload, stream start or publication endpoint. |
+
+Added: eight-stem audio mixing, MIDI sketches, music-video waveform/motion/chroma key, versioned UTF-8 documents, named installed-app launch, fixed recipe roles, stage progress, diagnostic reports and selected brand masters. See the creative-suite capability matrix for exact boundaries.
 
 Default workspace: `~/Documents/EmberBanterHub`, outside Git. This is a personal workstation application, not a multi-tenant cloud service or OS-level media sandbox. No malware scanner or always-on agent swarm is claimed.
 
@@ -57,7 +59,7 @@ Equations: `duration = frames / fps`; `MiB = bitrate_bits_per_second × seconds 
 
 1. Pair Dam's real phone over private HTTPS; test reconnect, expired sessions, downloads and Add to Home Screen. Tailscale Serve is the researched option, still unconfigured.
 2. Configure OBS password privately; verify reviewed controls in a deliberate rehearsal. Test actual microphone/interface, Xbox picture/game sound, party consent, BRB silence and sync.
-3. Extend the edit model to multiple sources/audio tracks, level automation, overlays, chroma key and transitions between cuts. A title fade is not a full keyframe compositor.
+3. Extend the existing cut editor to multitrack/keyframe timelines and transitions. Separate v0.5 workflows now mix stems and compose music videos with waveform/chroma key; they do not create a full general timeline.
 4. Integrate transcription jobs from the existing whisper.cpp/Shotcut workflow after a real-voice benchmark. No silent model download.
 5. Connect per-provider OAuth/private drafts, then publishing approval and reconciliation receipts. A hosted authenticated MCP relay needs device identity, pairing and revocation before ChatGPT mobile can control the laptop directly.
 
