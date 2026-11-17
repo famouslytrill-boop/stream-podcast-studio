@@ -7,7 +7,7 @@ description: "Use for EmberBanter naming, brand comparisons, palettes, logo dire
 
 Read [brand and verified state](../../references/brand-and-state.md) and [brand directions](../../references/brand-directions.md). Exact palette, tagline and concept status are in [brand-directions.json](../../assets/brand-lab/brand-directions.json). The five directions are proposals, not five active businesses.
 
-Keep EmberBanter and its existing badge as the working identity unless the owner selects a replacement. Do not rename the plugin, change active scenes or invent owned handles while comparing concepts. Produce original creative work; never claim legal exclusivity, profitability or registered protection from a generated logo or an empty search.
+The owner selected EmberBanter for the full creator hub on November 17, 2026. Use its existing badge and current [creative-suite kit](../../references/creative-suite.md#brand-package). Earlier alternatives are historical concepts. Do not rename the plugin, change active scenes or invent owned handles while comparing concepts. Produce original creative work; never claim legal exclusivity, profitability or registered protection from a generated logo or an empty search.
 
 For names, research exact, spaced, phonetic and similar entertainment uses; record dated queries and concrete conflicts. Signed-in handle checks, domain registration and trademark clearance are separate states. A failed page fetch, blank search or unregistered exact spelling does not prove availability. Read current official USPTO guidance before legal-adjacent recommendations. Ask for the actual channel URL only after connected context cannot supply it.
 

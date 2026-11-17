@@ -1,4 +1,6 @@
-# Five original brand directions
+# Historical brand directions
+
+November 17, 2026: Dam selected **EmberBanter Studio** for the whole hub. Use the [current selected kit](creative-suite.md#brand-package). The following is retained research, not a pending naming decision.
 
 Concept expansion dated November 16, 2026. Recommendation is editorial opinion: **keep EmberBanter as the working name** because the existing badge, scenes and after-work show promise already fit. A new name has no demonstrated revenue advantage. The owner has not selected a replacement.
 

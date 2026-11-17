@@ -1,0 +1,44 @@
+{
+  "brand": "EmberBanter Studio",
+  "chosen_by_owner": "2026-11-17",
+  "descriptor": "Music. Games. Stories.",
+  "tagline": "Clock out. Queue up.",
+  "palette": {
+    "charcoal": "#101216",
+    "surface": "#191D22",
+    "ember": "#FF6A3D",
+    "mint": "#8EF2CE",
+    "bone": "#F4F1E8"
+  },
+  "fonts": {
+    "headings": "DejaVu Sans bold / system sans fallback",
+    "body": "Segoe UI, system-ui, sans-serif",
+    "timecode": "ui-monospace, monospace"
+  },
+  "masters": {
+    "scenes": [
+      1920,
+      1080
+    ],
+    "podcast": [
+      3000,
+      3000
+    ],
+    "vertical": [
+      1080,
+      1920
+    ],
+    "banner": [
+      2560,
+      1440
+    ],
+    "thumbnail": [
+      1280,
+      720
+    ]
+  },
+  "motion_ms": 250,
+  "reduced_motion": true,
+  "logo": "Existing owner badge; not a trademark clearance claim",
+  "templates_require_editorial_review": true
+}

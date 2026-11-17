@@ -1,4 +1,6 @@
-# Hub naming and design kits
+# Historical hub naming exploration
+
+Superseded November 17: Dam selected **EmberBanter Studio** for the whole hub. Use the [current kit](CREATIVE_SUITE_2026-11-17.md#brand-package). The comparison below is a dated research record, not an active recommendation.
 
 Prepared November 16, 2026, America/New_York. Design recommendation: **keep EmberBanter as the channel; consider CueHearth Studio for the broader hub**. The plugin remains EmberBanter Studio until Dam chooses. Its package identity should stay stable through a display-name change.
 

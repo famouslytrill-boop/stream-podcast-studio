@@ -23,3 +23,5 @@ hub-workspace/
 build/
 dist/
 *.egg-info/
+!hub/web/brand/original-stinger.wav
+!plugin/runtime/hub/web/brand/original-stinger.wav

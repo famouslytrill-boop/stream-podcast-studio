@@ -19,6 +19,9 @@ import webbrowser
 
 from hub import VERSION
 from hub.core import Workspace, canonical, identifier
+from hub.apps import inventory
+from hub.projects import read_document, save_document, save_project
+from hub.workflows import RECIPES
 from tools.studio_tools import StudioError, doctor
 
 WEB = Path(__file__).parent / "web"
@@ -151,12 +154,21 @@ class Handler(BaseHTTPRequestHandler):
                     sessions = [{k: v for k, v in s.items() if k != "captions"} for s in ws.listing("sessions")]
                     self.reply(200, {"version": VERSION, "csrf": auth.get("csrf") if isinstance(auth, dict) else None,
                                      "media": ws.listing("media"), "sessions": sessions, "jobs": ws.listing("jobs"),
+                                     "projects": ws.listing("projects"), "documents": ws.listing("documents"),
+                                     "apps": inventory(), "workflows": RECIPES,
                                      "actions": [a for a in ws.listing("actions") if a["state"] == "pending" and a["expires"] > time.time()],
                                      "software": {k: v["found"] for k, v in binary["binaries"].items()},
                                      "phone_origin": self.server.public_origin, "obs_password_configured": bool(os.environ.get("EMBERBANTER_OBS_PASSWORD")),
                                      "publishing_connected": False, "go_live_available": False})
                 elif path == "/api/session":
                     self.reply(200, ws.get("sessions", query.get("id", [""])[0]))
+                elif path == "/api/document":
+                    self.reply(200, read_document(ws, query.get("id", [""])[0]))
+                elif path == "/api/brand-kit":
+                    from hub.brand import archive
+                    content = archive()
+                    self.headers_for(200, len(content), "application/zip", {"Content-Disposition": 'attachment; filename="EmberBanter_Brand_Kit.zip"'})
+                    self.wfile.write(content)
                 elif path == "/api/obs":
                     from hub.obs import status
                     self.reply(200, status())
@@ -180,9 +192,14 @@ class Handler(BaseHTTPRequestHandler):
                 else:
                     self.reply(404, {"error": "Unknown studio route"})
                 return
-            names = {"/": "index.html", "/index.html": "index.html", "/app.js": "app.js", "/style.css": "style.css",
+            names = {"/": "index.html", "/index.html": "index.html", "/app.js": "app.js", "/suite.js": "suite.js", "/style.css": "style.css", "/suite.css": "suite.css",
                      "/manifest.webmanifest": "manifest.webmanifest", "/sw.js": "sw.js", "/icon.svg": "icon.svg",
                      "/brand-kits.json": "brand-kits.json", "/icon-192.png": "icon-192.png", "/icon-512.png": "icon-512.png"}
+            brand_root = WEB / "brand"
+            if brand_root.is_dir():
+                for item in brand_root.iterdir():
+                    if item.is_file() and not item.is_symlink() and item.suffix in {".png", ".jpg", ".svg", ".json", ".wav"}:
+                        names["/brand/" + item.name] = "brand/" + item.name
             if path not in names:
                 self.reply(404, {"error": "Page not found"})
             else:
@@ -281,6 +298,13 @@ class Handler(BaseHTTPRequestHandler):
             data = self.read_json()
             if path == "/api/sessions":
                 self.reply(200, ws.save_session(data))
+            elif path == "/api/projects":
+                self.reply(200, save_project(ws, data))
+            elif path == "/api/documents":
+                self.reply(200, save_document(ws, data))
+            elif path == "/api/shell":
+                from hub.shell import run
+                self.reply(200, run(ws, data.get("command")))
             elif path == "/api/propose":
                 self.reply(201, ws.propose(data.get("kind"), data.get("params")))
             elif path == "/api/approve":

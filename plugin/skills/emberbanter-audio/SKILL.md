@@ -1,6 +1,6 @@
 ---
 name: emberbanter-audio
-description: "Use for EmberBanter microphone noise, gain, echo, clipping, loudness, podcast MP3 exports, audio inspection or reviewing recorded voice quality."
+description: "Use for EmberBanter microphone noise, gain, echo, clipping, loudness, podcast MP3 exports, stem mixing, MIDI sketches, music editing, audio inspection or reviewing recorded voice quality."
 ---
 
 # Audio production
@@ -15,3 +15,5 @@ For an authorized podcast export, create a new MP3 with the bundled audio-export
 
 Report actual integrated loudness, true peak, sample/channel format, analyzed scope and saved output. Listen to a representative full production review before declaring release-ready; if listening is unavailable, say so. Never manufacture a sonic judgment from the filename or numeric level alone.
 
+
+For the v0.5 music mixer or MIDI sketches, read [creative-suite contracts](../../references/creative-suite.md). Discover the executing laptop and real imported stems. Preserve its exact trim, offset, gain and stereo-balance settings; require source-content and permissions review. Target loudness and a decode receipt do not establish mastering quality. MIDI carries note data and its guide tone is not a finished instrument production. Do not claim FLP creation or actual DAW edits from a launcher or MIDI export.

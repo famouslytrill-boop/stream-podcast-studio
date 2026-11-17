@@ -18,7 +18,8 @@ import uuid
 from tools.captions import parse_srt
 from tools.studio_tools import StudioError, finite, executable, run_process
 
-MEDIA_SUFFIXES = {".mp4", ".mkv", ".mov", ".webm", ".wav", ".flac", ".mp3", ".m4a", ".ogg", ".opus"}
+IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".webp"}
+MEDIA_SUFFIXES = {".mp4", ".mkv", ".mov", ".webm", ".wav", ".flac", ".mp3", ".m4a", ".ogg", ".opus"} | IMAGE_SUFFIXES
 FORMATS = {"landscape": (1280, 720), "vertical": (1080, 1920), "podcast": None}
 OBS_ACTIONS = {"record_start", "record_stop", "record_pause", "record_resume", "scene", "mute", "volume"}
 
@@ -48,6 +49,15 @@ def probe_media(path):
     streams = data.get("streams", [])
     video = next((s for s in streams if s.get("codec_type") == "video" and not s.get("disposition", {}).get("attached_pic")), None)
     audio = [s for s in streams if s.get("codec_type") == "audio"]
+    if Path(path).suffix.lower() in IMAGE_SUFFIXES:
+        if (not video or video.get("codec_name") not in {"png", "mjpeg", "webp"}
+                or max(video.get("width", 0), video.get("height", 0)) > 8192
+                or Path(path).stat().st_size > 20_000_000):
+            raise StudioError("Artwork needs a PNG, JPEG or WebP under 20 MB and 8192 pixels")
+        run_process([executable("ffmpeg"), "-nostdin", "-v", "error", "-xerror", "-protocol_whitelist", "file,pipe",
+                     "-i", str(path), "-frames:v", "1", "-f", "null", "-"], 30)
+        return {"image": True, "duration": 0, "duration_basis": "still_image", "video": False,
+                "width": video["width"], "height": video["height"], "audio_tracks": 0, "video_index": video["index"]}
     if not video and not audio:
         raise StudioError("No playable audio or video found")
     duration = data.get("format", {}).get("duration")
@@ -88,7 +98,7 @@ class Workspace:
         except OSError:
             self.file_lock.close()
             raise StudioError("This studio workspace is already open. Use its existing server") from None
-        for folder in ("media", "exports", "incoming"):
+        for folder in ("media", "exports", "incoming", "documents"):
             (self.root / folder).mkdir(exist_ok=True)
         self.db_path = self.root / "studio.sqlite3"
         self.lock = threading.RLock()
@@ -109,6 +119,8 @@ class Workspace:
             db.executescript("""
                 CREATE TABLE IF NOT EXISTS media(id TEXT PRIMARY KEY, data TEXT NOT NULL);
                 CREATE TABLE IF NOT EXISTS sessions(id TEXT PRIMARY KEY, data TEXT NOT NULL);
+                CREATE TABLE IF NOT EXISTS projects(id TEXT PRIMARY KEY, data TEXT NOT NULL);
+                CREATE TABLE IF NOT EXISTS documents(id TEXT PRIMARY KEY, data TEXT NOT NULL);
                 CREATE TABLE IF NOT EXISTS actions(id TEXT PRIMARY KEY, data TEXT NOT NULL, state TEXT NOT NULL);
                 CREATE TABLE IF NOT EXISTS jobs(id TEXT PRIMARY KEY, data TEXT NOT NULL, state TEXT NOT NULL);
                 CREATE TABLE IF NOT EXISTS audit(id INTEGER PRIMARY KEY, at REAL NOT NULL, event TEXT NOT NULL, ref TEXT NOT NULL);
@@ -142,7 +154,7 @@ class Workspace:
             db.execute("INSERT INTO audit(at,event,ref) VALUES(?,?,?)", (time.time(), event, ref))
 
     def get(self, table, key):
-        assert table in {"media", "sessions", "actions", "jobs"}
+        assert table in {"media", "sessions", "actions", "jobs", "projects", "documents"}
         identifier(key)
         with self.db() as db:
             row = db.execute(f"SELECT data{',state' if table in {'actions','jobs'} else ''} FROM {table} WHERE id=?", (key,)).fetchone()
@@ -154,7 +166,7 @@ class Workspace:
         return result
 
     def listing(self, table):
-        assert table in {"media", "sessions", "jobs", "actions"}
+        assert table in {"media", "sessions", "jobs", "actions", "projects", "documents"}
         with self.db() as db:
             rows = db.execute(f"SELECT id FROM {table} ORDER BY rowid DESC LIMIT 100").fetchall()
         return [self.get(table, r[0]) for r in rows]
@@ -259,6 +271,9 @@ class Workspace:
             params = {"session": session, "source_sha256": self.get("media", session["media_id"])["sha256"]}
             seconds = round(sum(c["end"] - c["start"] for c in session["cuts"]), 3)
             summary = f"Export {len(session['cuts'])} cut(s), {seconds:g} seconds, {session['format']}. Create a new private file; preserve the original."
+        elif kind in {"music_mix", "music_video", "midi", "engineering", "launch_app"}:
+            from hub.workflows import prepare
+            params, summary = prepare(self, kind, params)
         elif kind == "obs":
             from hub.obs import validate_action
             params = validate_action(params)
@@ -329,6 +344,9 @@ class Workspace:
             elif action["kind"] == "bumper":
                 from hub.render import render_bumper
                 result = render_bumper(self, job_id, action["params"])
+            elif action["kind"] in {"music_mix", "music_video", "midi", "engineering", "launch_app"}:
+                from hub.workflows import execute
+                result = execute(self, job_id, action["kind"], action["params"])
             else:
                 from hub.obs import perform
                 result = perform(action["params"])
@@ -338,6 +356,16 @@ class Workspace:
             # Do not expose FFmpeg logs, raw metadata, machine paths or passwords.
             job.update(error=str(error) if isinstance(error, StudioError) else "Processing failed. Check local software and recording, then review a new proposal.", finished=time.time())
             state = "failed"
+        latest = self.get("jobs", job_id)
+        if "progress" in latest:
+            job["progress"] = latest["progress"]
         with self.db() as db:
             db.execute("UPDATE jobs SET data=?,state=? WHERE id=?", (canonical(job), state, job_id))
         self.log("job." + state, job_id)
+
+    def progress(self, job_id, stage, completed, total):
+        with self.db() as db:
+            job = self.get("jobs", job_id)
+            job.pop("state", None)
+            job["progress"] = {"stage": stage, "completed_steps": completed, "total_steps": total}
+            db.execute("UPDATE jobs SET data=? WHERE id=?", (canonical(job), job_id))
