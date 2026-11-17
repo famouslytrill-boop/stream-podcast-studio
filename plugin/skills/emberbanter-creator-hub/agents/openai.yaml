@@ -1,0 +1,6 @@
+interface:
+  display_name: "Personal Creator Hub"
+  short_description: "Operate the local creator studio and reviewed exports"
+  default_prompt: "Check my creator hub and prepare the next recording or edit action for review."
+policy:
+  allow_implicit_invocation: true

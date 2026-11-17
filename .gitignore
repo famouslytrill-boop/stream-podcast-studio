@@ -13,3 +13,13 @@ device-private/
 captions/
 models/
 *.log
+*.sqlite3
+*.sqlite3-*
+.pairing-key
+.hub-lock
+hub-workspace/
+*.zip
+*.tar.gz
+build/
+dist/
+*.egg-info/

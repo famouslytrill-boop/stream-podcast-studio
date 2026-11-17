@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101216"><meta name="description" content="Your private recording, editing and podcast workspace.">
+  <title>EmberBanter Studio</title>
+  <link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest">
+  <link rel="stylesheet" href="/style.css"><script src="/app.js" type="module"></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="wordmark" href="/" aria-label="EmberBanter Studio home"><img src="/icon.svg" alt="" width="56" height="56"><strong>EmberBanter</strong><span>STUDIO</span></a>
+    <nav aria-label="Studio navigation">
+      <button data-view="studio" class="active" aria-current="page">Studio</button><button data-view="library">Library</button><button data-view="exports">Exports</button><button data-view="brand">Brand lab</button><button data-view="connections">Connections</button>
+    </nav>
+    <p class="local-label">Local workspace</p>
+  </aside>
+  <main>
+    <header class="masthead"><div><h1>Your studio. Your pace.</h1><p>Record a session. Shape the story. Keep the original.</p></div><div class="connection"><strong>Laptop connection</strong><span id="connection-status">Not connected</span></div></header>
+    <section id="unsaved-take" class="connection-group" hidden><h2>Keep this take</h2><p>The laptop has not received this microphone take. Save a copy on this device before leaving.</p><div class="control-row"><a id="save-take" download>Save take to this device</a><button id="retry-take">Retry import</button><button id="dismiss-take">Dismiss after saving a copy</button></div></section>
+    <section id="pairing" class="pairing" hidden><h2>Connect your studio</h2><p>Open the laptop launcher to pair it here. For your phone, enter the private pairing key shown on the laptop.</p><form id="pair-form"><label>Pairing key<input id="pair-key" type="password" autocomplete="off" required></label><button class="primary">Connect</button></form><p class="muted">Keep this key private. It controls your personal workspace.</p></section>
+    <div id="workspace"></div>
+    <p id="notice" role="status" aria-live="polite" hidden></p>
+  </main>
+  <input id="import-file" type="file" accept=".mp4,.mkv,.mov,.webm,.wav,.flac,.mp3,.m4a,.ogg,.opus" hidden>
+  <dialog id="approval" aria-labelledby="approval-title"><h2 id="approval-title">Review action</h2><p id="approval-summary"></p><div id="approval-details"></div><p class="muted">This approval applies once to this exact action and expires after three minutes.</p><div class="dialog-actions"><button id="cancel-action">Cancel</button><button class="primary" id="approve-action">Approve and run</button></div></dialog>
+</body>
+</html>

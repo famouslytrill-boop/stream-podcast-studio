@@ -11,9 +11,11 @@ Route to the matching sibling skill for stream setup, podcast production, resear
 
 For a general studio check-in, report: current show goal; what is actually ready; the most consequential blocker; the next concrete task. Separate planned, generated, installed, connected and device-tested results. Never confuse a local source repository with a created private GitHub repository.
 
-Chat planning/research workflows support phone and desktop. Local file processing requires a suitable executor; OBS, drivers and routing require the actual streaming computer. This plugin supplies workflows and bundled scripts, with no hosted MCP server or live dashboard. Do not claim an unavailable tool, account connection or always-on device bridge.
+Chat planning/research workflows support phone and desktop. Local file processing requires a suitable executor; OBS, drivers and routing require the actual streaming computer. This plugin supplies workflows, bundled scripts and an optional local creator hub/MCP adapter. It has no hosted MCP server; a dashboard works only while the laptop hub is running. Do not claim an unavailable tool, account connection or always-on device bridge.
 
 Use America/New_York for the owner's schedules. Do not create recurring tasks or public schedules without a request. Do not purchase, invite guests, publish or go live unless the owner's task authorizes that action. Existing authorization persists within its scope. Keep all credentials private and out of output.
 
 Brand files: [existing scene kit](../../assets/brand/START_HERE.txt). Research anchors: [primary sources](../../references/research-sources.md).
 
+
+For the personal recording/editing control hub, use [creator hub](../emberbanter-creator-hub/SKILL.md). Legacy studio_tools.py remains read-only for OBS; the separate hub supports reviewed recording/scene/mixer writes. Local stdio tools and paired-phone PWA access require actual runtime connections.

@@ -19,3 +19,5 @@ OBS status is an authenticated loopback-only snapshot. Set EMBERBANTER_OBS_PASSW
 
 Test meaningful failure cases and real FFmpeg exports as appropriate. Clips require reviewed context/rights and corrected captions, preserve the source and use a new output folder. The benchmark measures supplied local speech; a synthetic speech pass is not real microphone accuracy. A simulated OBS pass is protocol coverage, not a test of the owner's live OBS. Before completing repository work, validate the archive, commit source and push to the verified private remote. If remote authentication is blocked, retain a durable source checkpoint and report that boundary accurately.
 
+
+For the personal recording/editing control hub, use [creator hub](../emberbanter-creator-hub/SKILL.md). Legacy studio_tools.py remains read-only for OBS; the separate hub supports reviewed recording/scene/mixer writes. Local stdio tools and paired-phone PWA access require actual runtime connections.
