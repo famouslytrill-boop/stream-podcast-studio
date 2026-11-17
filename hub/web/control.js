@@ -16,7 +16,7 @@ export function createControl(ctx){
     }
     if(view==='platforms'&&$('#handoff-title')){
       delivery={title:$('#handoff-title').value,topic:$('#handoff-topic').value,description:$('#handoff-description').value,
-        platforms:[...document.querySelectorAll('[data-destination]:checked')].map(el=>el.value),
+        platforms:document.querySelectorAll('[data-destination]').length?[...document.querySelectorAll('[data-destination]:checked')].map(el=>el.value):delivery.platforms,
         start_at:$('#handoff-start').value,duration_minutes:Number($('#handoff-duration').value),
         sources:$('#handoff-sources').value.split('\n').filter(s=>s.trim()).map(s=>{const split=s.indexOf(' | ');return split<0?{label:'Reviewed source',url:s.trim()}:{label:s.slice(0,split).trim(),url:s.slice(split+3).trim()};}),content_reviewed:$('#handoff-reviewed').checked};
     }
