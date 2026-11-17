@@ -4,7 +4,7 @@
     "email": "famouslytrill@gmail.com",
     "name": "damian"
   },
-  "description": "Private mobile and desktop workflows for EmberBanter streaming, podcasts, research and local production checks.",
+  "description": "Private creator studio workflows with a local recording, editing and export hub for laptop and paired phone use.",
   "extensions": {
     "com.openai": {
       "interface": {
@@ -20,7 +20,7 @@
         "developerName": "damian",
         "displayName": "EmberBanter Studio",
         "logo": "./assets/emberbanter-badge.png",
-        "longDescription": "Plan gaming streams and podcasts, research episode topics, check Xbox/OBS audio routing, draft clips and release copy, and use bundled local tools for software diagnostics, operator preflight, audio loudness, two-pass MP3 exports, RSS XML drafts and authenticated read-only OBS status. Chat workflows support phone and desktop. Local checks require an executing computer, Python and the relevant installed binaries; the plugin does not host an OBS bridge or automatically publish.",
+        "longDescription": "Plan streams and podcasts, inspect local software, prepare clips and revenue scenarios, and use the bundled creator hub to import recordings, arrange cuts, add corrected captions, render video or podcast files, and review local OBS recording, scene and mixer actions. A local MCP adapter can inspect the hub, save edit sessions and propose actions; the owner approves execution in the hub. Laptop execution is required. Phone web controls need a private HTTPS connection; ChatGPT mobile does not run local stdio tools. No hosted bridge, go-live or publishing integration is claimed.",
         "shortDescription": "Streaming & podcast production"
       }
     }
@@ -33,5 +33,5 @@
     "emberbanter"
   ],
   "name": "emberbanter-studio",
-  "version": "0.2.0"
+  "version": "0.3.0"
 }

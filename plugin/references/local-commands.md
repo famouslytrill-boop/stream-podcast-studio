@@ -19,7 +19,7 @@ From the plugin without installing the CLI, replace `emberbanter` with `python3 
 
 OBS diagnostics need the optional `websockets==16.0` package and a privately set `EMBERBANTER_OBS_PASSWORD` environment variable on the executing OBS computer. The tool never reads a .env file automatically. Never ask for that password in chat, pass it as a CLI argument, commit it or expose network ports.
 
-No command uploads, posts, submits feeds, buys hardware, contacts guests or starts a broadcast. Chat skills orchestrate the user's existing tools; the package does not add hosted MCP tools. Check what runtime is actually available before promising execution on mobile.
+The legacy commands above do not upload, post, submit feeds, buy hardware, contact guests or start a broadcast. Chat skills orchestrate the user's existing tools; the package does not add hosted MCP tools. Check what runtime is actually available before promising execution on mobile.
 
 ## Bundled caption and clip tools (source toolkit v0.3.0)
 
@@ -41,3 +41,7 @@ python3 "<growth skill>/scripts/studio_strategy.py" clip-score "<plugin>/assets/
 ```
 
 The first example is visibly hypothetical, not an account forecast; receipt/cost inputs must be supplied. Missing/null receipt or cost inputs return incomplete, not zero revenue. The profit target is optional: without it, known receipts and costs still calculate while target fields remain unknown. The score is editing judgment, not a ranking algorithm or viral probability. Neither command creates a file, accesses the network or publishes.
+
+## Personal creator hub
+
+See [creator-hub.md](creator-hub.md). From a real source checkout use `python -m hub.server --open`; from this plugin use the resolved `runtime/serve_hub.py` path. The separate hub imports media, records browser takes and performs exact owner-reviewed OBS recording/scene/mixer writes. `studio_tools.py` remains read-only. Local MCP offers six tools and no approval tool; it requires a compatible local host. Neither runtime connects publishing or starts a public stream.
