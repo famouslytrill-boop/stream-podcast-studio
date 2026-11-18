@@ -1,0 +1,48 @@
+name: Creator Hub
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: ${{ matrix.label }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            label: Linux media and hub tests
+            tests: discover -s tests
+          - os: windows-2025
+            label: Windows credential and OBS connection tests
+            tests: tests.test_setup.ConnectionTests
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Install FFmpeg
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+      - name: Build and install hub
+        run: python -m pip install ".[obs]"
+      - name: Check installed entry points and setup assets
+        run: >-
+          python -I -c "from importlib.metadata import distribution;
+          package = distribution('emberbanter-local-studio');
+          assert {'emberbanter-hub', 'emberbanter-mcp'} <= {entry.name for entry in package.entry_points};
+          assert all(package.locate_file(asset).is_file() for asset in ('hub/web/setup.js', 'hub/web/setup.css', 'hub/native_speech.ps1'))"
+      - name: Run tests
+        run: python -m unittest ${{ matrix.tests }} -v

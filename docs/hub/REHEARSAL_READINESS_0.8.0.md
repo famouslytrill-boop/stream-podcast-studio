@@ -69,6 +69,10 @@ Native Windows DPAPI acceptance and real Windows speech are skipped on the Linux
 
 Reproduce the optional DOM checks with `npm ci --prefix tests/ui`, then `python tests/ui/run_setup_dom.py`. Node requirements are pinned in `tests/ui/package.json`; Node/JSDOM are test-only and are not required by the hub runtime. The harness uses its own temporary media/workspace and clears inherited OBS credentials.
 
+GitHub Actions runs the media and hub suite on Linux and the OBS connection tests, including the native DPAPI round trip, on a Windows runner. Both jobs install the package and check its entry points and setup assets. Hosted runner results cover synthetic inputs. The OBS rehearsal, media routing and phone layout still require the owner's devices.
+
+This repository builds a local desktop hub. `vercel.json` disables automatic Git deployments for this repository. A separately scoped public site can have its own project and deployment configuration.
+
 ## Primary technical references
 
 - Microsoft CryptProtectData: https://learn.microsoft.com/en-us/windows/win32/api/dpapi/nf-dpapi-cryptprotectdata
