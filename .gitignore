@@ -17,6 +17,8 @@ models/
 *.sqlite3-*
 .pairing-key
 .hub-lock
+.connections-lock
+.obs-secret-*.dpapi
 hub-workspace/
 *.zip
 *.tar.gz
@@ -25,3 +27,4 @@ dist/
 *.egg-info/
 !hub/web/brand/original-stinger.wav
 !plugin/runtime/hub/web/brand/original-stinger.wav
+node_modules/

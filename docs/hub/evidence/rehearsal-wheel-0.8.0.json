@@ -1,0 +1,11 @@
+{
+  "version": "0.8.0",
+  "installed_wheel_executed": true,
+  "isolated_environment": true,
+  "platform": "Linux executor",
+  "tool_count": 23,
+  "new_read_tools_executed": true,
+  "owner_jobs_executed": 0,
+  "native_windows_verified": false,
+  "wheel_sha256": "1ab65cbbf1f08617f71fcb52af8f6959d784c85a20f235ef5f4b895c2b1602cc"
+}

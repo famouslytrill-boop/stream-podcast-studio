@@ -159,7 +159,7 @@ class Handler(BaseHTTPRequestHandler):
                                      "recordings_folder_configured": ws.recordings_root is not None,
                                      "actions": [a for a in ws.listing("actions") if a["state"] == "pending" and a["expires"] > time.time()],
                                      "software": {k: v["found"] for k, v in binary["binaries"].items()},
-                                     "phone_origin": self.server.public_origin, "obs_password_configured": bool(os.environ.get("EMBERBANTER_OBS_PASSWORD")),
+                                     "phone_origin": self.server.public_origin, "obs_password_configured": ws.obs_password_configured(),
                                      "publishing_connected": False, "go_live_available": False})
                 elif path == "/api/session":
                     self.reply(200, ws.get("sessions", query.get("id", [""])[0]))
@@ -190,9 +190,19 @@ class Handler(BaseHTTPRequestHandler):
                 elif path == "/api/hardware":
                     from hub.performance import hardware
                     self.reply(200, hardware())
+                elif path in {"/api/readiness","/api/readiness-report"}:
+                    from hub.readiness import snapshot
+                    self.reply(200,snapshot(ws,phone_origin=self.server.public_origin),
+                               {"Content-Disposition":'attachment; filename="EmberBanter_Setup_Report.json"'} if path.endswith("-report") else None)
+                elif path == "/api/rehearsals":
+                    from hub.rehearsal import listing
+                    self.reply(200,listing(ws))
+                elif path == "/api/rehearsal":
+                    self.reply(200,ws.get("rehearsals",query.get("id",[""])[0]),
+                               {"Content-Disposition":'attachment; filename="EmberBanter_Rehearsal_Report.json"'} if query.get("download")==["1"] else None)
                 elif path == "/api/obs":
                     from hub.obs import status
-                    self.reply(200, status())
+                    self.reply(200, status(ws))
                 elif path == "/api/pairing-key":
                     self.authenticate(owner_only=True)
                     self.reply(200, {"key": ws.pairing_key})
@@ -213,7 +223,7 @@ class Handler(BaseHTTPRequestHandler):
                 else:
                     self.reply(404, {"error": "Unknown studio route"})
                 return
-            names = {"/": "index.html", "/index.html": "index.html", "/app.js": "app.js", "/suite.js": "suite.js", "/style.css": "style.css", "/suite.css": "suite.css", "/broadcast.js": "broadcast.js", "/broadcast.css": "broadcast.css", "/control.js":"control.js", "/control.css":"control.css",
+            names = {"/": "index.html", "/index.html": "index.html", "/app.js": "app.js", "/suite.js": "suite.js", "/style.css": "style.css", "/suite.css": "suite.css", "/broadcast.js": "broadcast.js", "/broadcast.css": "broadcast.css", "/control.js":"control.js", "/control.css":"control.css", "/setup.js":"setup.js", "/setup.css":"setup.css",
                      "/manifest.webmanifest": "manifest.webmanifest", "/sw.js": "sw.js", "/icon.svg": "icon.svg",
                      "/brand-kits.json": "brand-kits.json", "/icon-192.png": "icon-192.png", "/icon-512.png": "icon-512.png"}
             brand_root = WEB / "brand"
@@ -296,7 +306,7 @@ class Handler(BaseHTTPRequestHandler):
                     cookie += "; Secure"
                 self.reply(200, {"paired": True, "csrf": csrf}, {"Set-Cookie": cookie})
                 return
-            self.authenticate(write=True, owner_only=path in {"/api/approve", "/api/reject", "/api/logout"})
+            self.authenticate(write=True, owner_only=path in {"/api/approve", "/api/reject", "/api/logout", "/api/rehearsals"})
             if path == "/api/media":
                 length = self.length(MAX_UPLOAD)
                 name = unquote(self.headers.get("X-File-Name", "recording.webm"))
@@ -323,6 +333,9 @@ class Handler(BaseHTTPRequestHandler):
                 self.reply(200, save_project(ws, data))
             elif path == "/api/documents":
                 self.reply(200, save_document(ws, data))
+            elif path == "/api/rehearsals":
+                from hub.rehearsal import save
+                self.reply(201,save(ws,data))
             elif path == "/api/storyboards":
                 from hub.storyboard import save
                 self.reply(200, save(ws, data))

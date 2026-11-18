@@ -42,5 +42,6 @@
       "authority": "exact one-use approval, account sign-in and final publication",
       "runtime": "owner hub UI / official platform portal"
     }
-  ]
+  ],
+  "owner_evidence": "Only paired owner browser + CSRF can append rehearsal observations; agent tools are read-only. Reports never automatically prove hardware/public delivery."
 }

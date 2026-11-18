@@ -1,0 +1,18 @@
+{
+  "toolkit": "0.8.0",
+  "tests_run": 105,
+  "passed": 103,
+  "skipped": 2,
+  "skips": [
+    "Windows native narration",
+    "Windows native DPAPI roundtrip"
+  ],
+  "platform": "Linux executor",
+  "device_online": false,
+  "laptop_install_verified": false,
+  "rendered_browser_verified": false,
+  "functional_dom_http_verified": true,
+  "tcp_websocket_fixture_verified": true,
+  "new_mcp_tools": 2,
+  "total_mcp_tools": 23
+}

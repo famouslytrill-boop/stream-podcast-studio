@@ -1,3 +1,5 @@
+Current prepared 0.8.0 extension: [persistent private OBS setup, diagnostics and owner rehearsal reports](rehearsal-readiness.md). Laptop upgrade/native acceptance pending while DTG is offline. Existing instructions below remain applicable where not extended.
+
 # Streaming setup and acceptance
 
 Use the existing gear first. Inventory OS/CPU/GPU/RAM, mic/interface models, Xbox model, headset/capture card and measured sustained upload. On the selected computer run the bundled doctor before recommending installs. Its missing GUI-app PATH result may need a normal installation-directory check.

@@ -1,0 +1,11 @@
+{
+  "name": "emberbanter-ui-checks",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "jsdom": "31.0.1"
+  },
+  "engines": {
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
+  }
+}

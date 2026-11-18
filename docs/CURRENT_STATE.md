@@ -1,6 +1,8 @@
 # EmberBanter current state
 
-Latest source: **v0.7.0 creator control**, plugin source **v0.6.0**. [Current contracts](hub/CREATOR_CONTROL_0.7.0.md), [brand/market research](hub/BRAND_AND_MARKET_2026-11-17.md). Local narration, saved scene films, platform draft packs, history and measured encoder probes extend the existing capture/episode suite. [Verified laptop install, tests and release evidence](hub/CREATOR_CONTROL_VERIFICATION.md) now record actual execution. Branding now presents only Gaming, Streaming, Podcasts; Music. Games. Stories. is preserved.
+Latest prepared source: **0.8.0 rehearsal readiness** / plugin **0.7.0**. [Current contracts and verification boundary](hub/REHEARSAL_READINESS_0.8.0.md). DTG is offline during this pass; the last verified installed laptop hub remains 0.7.0. Source 0.8.0 adds private persistent OBS profiles, actionable setup diagnostics, capture-folder recovery and owner-only rehearsal evidence. No new device connection or installation is claimed.
+
+Previous verified source: **v0.7.0 creator control**, plugin source **v0.6.0**. [Current contracts](hub/CREATOR_CONTROL_0.7.0.md), [brand/market research](hub/BRAND_AND_MARKET_2026-11-17.md). Local narration, saved scene films, platform draft packs, history and measured encoder probes extend the existing capture/episode suite. [Verified laptop install, tests and release evidence](hub/CREATOR_CONTROL_VERIFICATION.md) now record actual execution. Branding now presents only Gaming, Streaming, Podcasts; Music. Games. Stories. is preserved.
 
 Previous: **v0.6.0 broadcast workflows** — [current capture/episode contracts and evidence](hub/BROADCAST_0.6.0.md). Historical brand focus included editing; the 0.7.0 public kit is Gaming, Streaming, Podcasts; descriptor stays Music. Games. Stories. Audacity portable is now installed/running. Earlier notes below are historical.
 

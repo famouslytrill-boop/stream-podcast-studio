@@ -1,3 +1,5 @@
+Current prepared 0.8.0 extension: [persistent private OBS setup, diagnostics and owner rehearsal reports](rehearsal-readiness.md). Laptop upgrade/native acceptance pending while DTG is offline. Existing instructions below remain applicable where not extended.
+
 # Current extension: creator control 0.7.0 / plugin 0.6.0
 
 Read [creative control](creative-control.md). The earlier hub architecture below remains applicable except where extended.
@@ -47,7 +49,7 @@ The account plugin includes a portable local stdio configuration/runtime for a c
 python -m hub.mcp
 ```
 
-Use the running server's workspace/port. Twenty-one tools inspect, save edits/projects/documents, import selected local media, run the studio command language, calculate media estimates and propose actions. Approve pending actions in Connections in the owner web UI. No agent approval tool is provided. No platform account, broadcast or publication is activated by installation.
+Use the running server's workspace/port. Twenty-three tools inspect, save edits/projects/documents, import selected local media, run the studio command language, calculate media estimates and propose actions. Approve pending actions in Connections in the owner web UI. No agent approval tool is provided. No platform account, broadcast or publication is activated by installation.
 
 ## Music, music video and shell
 

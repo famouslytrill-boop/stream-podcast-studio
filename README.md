@@ -5,6 +5,7 @@ Personal gaming, streaming and podcast studio with video/audio editing, local to
 
 EmberBanter — **Clock out. Queue up.** Chosen studio identity. Handles and domains are not confirmed.
 
+- [Rehearsal readiness and private OBS setup — prepared 0.8.0](docs/hub/REHEARSAL_READINESS_0.8.0.md)
 - [Creator control: narration, storyboards, platform handoffs and history](docs/hub/CREATOR_CONTROL_0.7.0.md)
 - [Hardware-to-publication setup](docs/hub/HARDWARE_TO_PUBLISH.md)
 - [Creator control tests and actual laptop installation](docs/hub/CREATOR_CONTROL_VERIFICATION.md)
@@ -36,8 +37,8 @@ Tests: `python -m unittest discover -s tests -v`.
 
 Recordings, rendered media, secrets and private device files are excluded from Git. Session and clip CSV templates are intentionally empty. Use actual channel URLs, timestamps and measured results; missing data stays blank.
 
-The source toolkit is v0.7.0. It can burn reviewed source-timeline SRT captions into clips while preserving the original files. The owned ChatGPT plugin's v0.6.0 source is now included under [plugin/](plugin/), with dedicated brand and economics workflows, scenario arithmetic, the selected EmberBanter brand kit and archived alternatives and the current media helpers. See the [plugin release evidence](docs/PLUGIN_0.2.0_RELEASE.md). An installed plugin release is verified separately through the backend; checking out this repository alone does not install it. No command in this toolkit publishes content or starts a broadcast.
+The source toolkit is v0.8.0. It can burn reviewed source-timeline SRT captions into clips while preserving the original files. The owned ChatGPT plugin's v0.7.0 source is now included under [plugin/](plugin/), with dedicated brand and economics workflows, scenario arithmetic, the selected EmberBanter brand kit and archived alternatives and the current media helpers. See the [plugin release evidence](docs/PLUGIN_0.2.0_RELEASE.md). An installed plugin release is verified separately through the backend; checking out this repository alone does not install it. No command in this toolkit publishes content or starts a broadcast.
 
 ## Personal Creator Hub
 
-Use `python -m hub.server --open` for the private laptop application. Read the [quick start](docs/hub/QUICK_START.md), [architecture and capability boundaries](docs/hub/ARCHITECTURE.md), and [selected design kit](docs/hub/CREATIVE_SUITE_2026-11-17.md#brand-package). The hub adds a dashboard, scoped interactive shell, projects and actual versioned text files, eight-stem mixing, MIDI sketches, waveform/chroma-key music videos, fixed automation, studio diagnostics, app launch proposals, brand templates and 21 local MCP tools. Existing reviewed cuts, captions and microphone takes remain. A real phone needs private HTTPS pairing; ChatGPT mobile needs a separately connected hosted bridge. Neither is silently activated.
+Use `python -m hub.server --open` for the private laptop application. Read the [quick start](docs/hub/QUICK_START.md), [architecture and capability boundaries](docs/hub/ARCHITECTURE.md), and [selected design kit](docs/hub/CREATIVE_SUITE_2026-11-17.md#brand-package). The hub adds a dashboard, scoped interactive shell, projects and actual versioned text files, eight-stem mixing, MIDI sketches, waveform/chroma-key music videos, fixed automation, studio diagnostics, app launch proposals, brand templates and 23 local MCP tools. Existing reviewed cuts, captions and microphone takes remain. A real phone needs private HTTPS pairing; ChatGPT mobile needs a separately connected hosted bridge. Neither is silently activated.

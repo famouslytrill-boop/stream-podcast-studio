@@ -20,3 +20,5 @@ For repair, inspect studio_history and the job receipt. Preserve sources, identi
 Read actual job evidence after execution. Separate generated private files, editorial review, device rehearsal, account eligibility and external delivery. Read [brand/market research](../../references/brand-market-2026-11-17.md) for dated primary evidence. Preserve EmberBanter, Music. Games. Stories. and the Gaming/Streaming/Podcasts-only public kit.
 
 For start-to-finish setup, follow [hardware to publication](../../references/hardware-to-publish.md), verifying each actual device and account acceptance gate.
+
+Current prepared toolkit 0.8.0: follow [private OBS setup and owner rehearsal evidence](../../references/rehearsal-readiness.md). Use studio_readiness/studio_rehearsals for read-only inspection. Never submit owner attestations, approve a control, enable an OBS server or retry an uncertain mutation on the owner’s behalf. Native Windows DPAPI and rendered-device acceptance are pending while DTG is offline; do not call this laptop-installed.

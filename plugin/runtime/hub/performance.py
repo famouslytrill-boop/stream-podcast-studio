@@ -56,7 +56,7 @@ def prepare(data):
 def benchmark(ws,job_id,data):
     if ws.obs_password_configured():
         from hub.obs import status
-        obs=status()
+        obs=status(ws)
         if obs["stream"].get("outputActive") or obs["recording"].get("outputActive"):raise StudioError("Wait until OBS is not streaming or recording before this encoder check")
     directory=ws.root/"exports"/job_id;directory.mkdir(exist_ok=False)
     advertised=run_process([executable("ffmpeg"),"-hide_banner","-encoders"],15).stdout
